@@ -1,12 +1,20 @@
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HostelDetails from './components/HostelDetails'
 import HomePage from './pages/HomePage'
 
 function App() {
   return (
-    <div>
+    <>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/hostels/:id" element={<HostelDetails/>} />
+        
+      </Routes>
+
+      </BrowserRouter>
       <HomePage/>
-    </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
