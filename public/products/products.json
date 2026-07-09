@@ -1,0 +1,213 @@
+[
+  {
+    "id": 1,
+    "name": "Sunrise Student Hostel",
+    "location": "Kasarani, Nairobi",
+    "price": 6500,
+    "rating": 4.8,
+    "description": "Modern hostel with spacious rooms and high-speed Wi-Fi.",
+    "amenities": ["Wi-Fi", "Water", "Security", "Laundry"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Campus View Hostel",
+    "location": "Ruiru",
+    "price": 7000,
+    "rating": 4.6,
+    "description": "Affordable student accommodation near universities.",
+    "amenities": ["Wi-Fi", "Parking", "CCTV", "Study Room"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-cf0c5271f5b9",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Green Haven Hostel",
+    "location": "Kikuyu",
+    "price": 5500,
+    "rating": 4.5,
+    "description": "Peaceful environment ideal for studying.",
+    "amenities": ["Wi-Fi", "Water", "Laundry", "Kitchen"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Elite Residency",
+    "location": "Thika",
+    "price": 8000,
+    "rating": 4.9,
+    "description": "Premium student hostel with modern amenities.",
+    "amenities": ["Wi-Fi", "Gym", "Parking", "Security"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-cf0c5271f5b9",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Royal Students Inn",
+    "location": "Rongai",
+    "price": 6200,
+    "rating": 4.4,
+    "description": "Comfortable rooms with a quiet study environment.",
+    "amenities": ["Wi-Fi", "Laundry", "Kitchen", "Water"],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Blue Sky Hostel",
+    "location": "Kiambu",
+    "price": 6800,
+    "rating": 4.7,
+    "description": "Secure and affordable accommodation for students.",
+    "amenities": ["Wi-Fi", "CCTV", "Water", "Parking"],
+    "images": [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Scholars Residence",
+    "location": "Juja",
+    "price": 5900,
+    "rating": 4.3,
+    "description": "Budget-friendly hostel close to campus.",
+    "amenities": ["Wi-Fi", "Kitchen", "Laundry", "Water"],
+    "images": [
+      "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Comfort Stay",
+    "location": "Karen",
+    "price": 9000,
+    "rating": 4.9,
+    "description": "Luxury student apartments with premium facilities.",
+    "amenities": ["Wi-Fi", "Gym", "Swimming Pool", "Security"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-cf0c5271f5b9",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Smart Living Hostel",
+    "location": "Ngong",
+    "price": 6100,
+    "rating": 4.5,
+    "description": "Modern rooms with excellent internet connection.",
+    "amenities": ["Wi-Fi", "Study Room", "Laundry", "Parking"],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Victory Hostel",
+    "location": "Westlands",
+    "price": 8500,
+    "rating": 4.8,
+    "description": "Elegant student accommodation with all essentials.",
+    "amenities": ["Wi-Fi", "Parking", "Gym", "24/7 Security"],
+    "images": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688"
+    ]
+  },
+
+  {
+    "id": 11,
+    "name": "Horizon Hostels",
+    "location": "South B, Nairobi",
+    "price": 7200,
+    "rating": 4.7,
+    "description": "Modern student hostel with spacious rooms, high-speed Wi-Fi, and excellent security.",
+    "amenities": ["Wi-Fi", "Laundry", "Parking", "24/7 Security"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "UniNest Residence",
+    "location": "Embakasi, Nairobi",
+    "price": 6800,
+    "rating": 4.6,
+    "description": "Comfortable and affordable accommodation designed for university students.",
+    "amenities": ["Wi-Fi", "Study Room", "Kitchen", "Water"],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Maple Student Homes",
+    "location": "Ngong Road, Nairobi",
+    "price": 7600,
+    "rating": 4.8,
+    "description": "Premium hostel offering modern rooms and a quiet study environment.",
+    "amenities": ["Wi-Fi", "Gym", "Parking", "Laundry"],
+    "images": [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+      "https://images.unsplash.com/photo-1505693416388-cf0c5271f5b9",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Prime Scholars Hostel",
+    "location": "Ruaka, Kiambu",
+    "price": 6400,
+    "rating": 4.5,
+    "description": "Affordable hostel with modern amenities and reliable security.",
+    "amenities": ["Wi-Fi", "Water", "CCTV", "Laundry"],
+    "images": [
+      "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Golden Gate Hostel",
+    "location": "Karen, Nairobi",
+    "price": 9500,
+    "rating": 5.0,
+    "description": "Luxury student residence featuring elegant rooms, modern facilities, and a serene environment.",
+    "amenities": ["Wi-Fi", "Gym", "Swimming Pool", "24/7 Security"],
+    "images": [
+      "https://images.unsplash.com/photo-1505693416388-cf0c5271f5b9",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688"
+    ]
+  }
+]
