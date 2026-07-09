@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import ImageGallery from "./ImageGallery";
 const HostelDetails = () => {
   const { id } = useParams();
   const [hostel, setHostel] = useState(null);
@@ -48,9 +48,9 @@ const HostelDetails = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <div className="grid md:grid-cols-2 gap-10">
-        <img
-          src={hostel.images[0]}
-          alt={hostel.name}
+        <ImageGallery
+          images={hostel.images}
+          name={hostel.name}
           className="w-full h-[450px] object-cover rounded-xl shadow-lg"
         />
 
