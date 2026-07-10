@@ -467,6 +467,88 @@ email: ""
     </CardContent>
   </Card>
 )}
+{step === 7 && (
+  <Card>
+
+    <CardHeader>
+      <CardTitle>Review Hostel Listing</CardTitle>
+    </CardHeader>
+
+    <CardContent className="space-y-4">
+
+      <div>
+        <strong>Hostel Name:</strong> {hostelData.hostelName}
+      </div>
+
+      <div>
+        <strong>Description:</strong> {hostelData.description}
+      </div>
+
+      <div>
+        <strong>University:</strong> {hostelData.university}
+      </div>
+
+      <div>
+        <strong>Hostel Type:</strong> {hostelData.hostelType}
+      </div>
+
+      <div>
+        <strong>Room Type:</strong> {hostelData.roomType}
+      </div>
+
+      <div>
+        <strong>County:</strong> {hostelData.county}
+      </div>
+
+      <div>
+        <strong>Area:</strong> {hostelData.area}
+      </div>
+
+      <div>
+        <strong>Monthly Rent:</strong> KES {hostelData.rent}
+      </div>
+
+      <div>
+        <strong>Deposit:</strong> KES {hostelData.deposit}
+      </div>
+
+      <div>
+        <strong>Booking Fee:</strong> KES {hostelData.bookingFee}
+      </div>
+
+      <div>
+        <strong>Amenities:</strong>{" "}
+        {hostelData.amenities.length > 0
+          ? hostelData.amenities.join(", ")
+          : "None selected"}
+      </div>
+
+      <div>
+        <strong>Owner:</strong> {hostelData.ownerName}
+      </div>
+
+      <div>
+        <strong>Phone:</strong> {hostelData.phone}
+      </div>
+
+      <div>
+        <strong>Email:</strong> {hostelData.email}
+      </div>
+
+      <Button
+        className="w-full bg-green-600 hover:bg-green-700"
+        onClick={() => {
+          console.log(hostelData);
+          alert("Hostel Published Successfully!");
+        }}
+      >
+        Publish Hostel
+      </Button>
+
+    </CardContent>
+
+  </Card>
+)}
          </div>
          <div className="flex justify-between mt-8">
   <Button
