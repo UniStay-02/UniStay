@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import {
   FaUser,
   FaEnvelope,
@@ -11,9 +12,11 @@ import {
 } from "react-icons/fa";
 
 const StudentForm = ({ onSave }) => {
+  const { user } = useAuth();
+
   const [student, setStudent] = useState({
     fullName: "",
-    email: "",
+    email: user?.email || "",
     phone: "",
     university: "",
     campus: "",
@@ -33,7 +36,14 @@ const StudentForm = ({ onSave }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const values = Object.values(student);
+    const values = [
+      student.fullName,
+      student.phone,
+      student.university,
+      student.campus,
+      student.course,
+      student.yearOfStudy,
+    ];
 
     if (values.some((value) => value.trim() === "")) {
       setError("Please fill in all the required fields.");
@@ -42,10 +52,6 @@ const StudentForm = ({ onSave }) => {
 
     setError("");
 
-    // Save to localStorage
-    localStorage.setItem("studentProfile", JSON.stringify(student));
-
-    // Send data to Profile.jsx
     if (onSave) {
       onSave(student);
     }
@@ -59,6 +65,7 @@ const StudentForm = ({ onSave }) => {
 
       <form onSubmit={handleSubmit}>
         <div className="grid md:grid-cols-2 gap-6">
+          {/* Full Name */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaUser className="text-[#F98603]" />
@@ -70,11 +77,12 @@ const StudentForm = ({ onSave }) => {
               name="fullName"
               value={student.fullName}
               onChange={handleChange}
-              placeholder="Enter full name"
+              placeholder="Enter your full name"
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
             />
           </div>
 
+          {/* Email */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaEnvelope className="text-[#F98603]" />
@@ -85,12 +93,12 @@ const StudentForm = ({ onSave }) => {
               type="email"
               name="email"
               value={student.email}
-              onChange={handleChange}
-              placeholder="Enter email"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              readOnly
+              className="w-full border rounded-lg p-3 bg-gray-100 text-gray-600 cursor-not-allowed"
             />
           </div>
 
+          {/* Phone */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaPhone className="text-[#F98603]" />
@@ -102,11 +110,12 @@ const StudentForm = ({ onSave }) => {
               name="phone"
               value={student.phone}
               onChange={handleChange}
-              placeholder="Enter phone number"
+              placeholder="Enter your phone number"
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
             />
           </div>
 
+          {/* University */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaUniversity className="text-[#F98603]" />
@@ -118,11 +127,12 @@ const StudentForm = ({ onSave }) => {
               name="university"
               value={student.university}
               onChange={handleChange}
-              placeholder="Enter university"
+              placeholder="Enter your university"
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
             />
           </div>
 
+          {/* Campus */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaMapMarkerAlt className="text-[#F98603]" />
@@ -134,11 +144,12 @@ const StudentForm = ({ onSave }) => {
               name="campus"
               value={student.campus}
               onChange={handleChange}
-              placeholder="Enter campus"
+              placeholder="Enter your campus"
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
             />
           </div>
 
+          {/* Course */}
           <div>
             <label className="flex items-center gap-2 mb-2">
               <FaGraduationCap className="text-[#F98603]" />
@@ -150,11 +161,12 @@ const StudentForm = ({ onSave }) => {
               name="course"
               value={student.course}
               onChange={handleChange}
-              placeholder="Enter course"
+              placeholder="Enter your course"
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
             />
           </div>
 
+          {/* Year of Study */}
           <div className="md:col-span-2">
             <label className="flex items-center gap-2 mb-2">
               <FaCalendarAlt className="text-[#F98603]" />
@@ -178,7 +190,7 @@ const StudentForm = ({ onSave }) => {
           </div>
         </div>
 
-        {error && <p className="text-red-600 mt-4">{error}</p>}
+        {error && <p className="text-red-600 mt-4 font-medium">{error}</p>}
 
         <button
           type="submit"
