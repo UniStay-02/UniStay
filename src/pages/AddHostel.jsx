@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "src/components/ui/checkbox";
 
 
 export default function AddHostel() {
@@ -28,7 +29,7 @@ export default function AddHostel() {
     university: "",
     hostelType: "",
     roomType: "",
-
+     amenities: [],
     coverImage: null,
     galleryImages: [],
     county: "",
@@ -50,6 +51,15 @@ mapLink: "",
   const handleGalleryImages = (e) => {
     handleChange("galleryImages", Array.from(e.target.files));
   };
+
+  const toggleAmenity = (amenity) => {
+  setHostelData((prev) => ({
+    ...prev,
+    amenities: prev.amenities.includes(amenity)
+      ? prev.amenities.filter((item) => item !== amenity)
+      : [...prev.amenities, amenity],
+  }));
+};
 
   return (
     <div className="min-h-screen bg-slate-100 p-8">
@@ -323,6 +333,50 @@ mapLink: "",
           value={hostelData.mapLink || ""}
           onChange={(e) => handleChange("mapLink", e.target.value)}
         />
+      </div>
+
+    </CardContent>
+  </Card>
+)}
+{step === 4 && (
+  <Card>
+    <CardHeader>
+      <CardTitle>Amenities</CardTitle>
+    </CardHeader>
+
+    <CardContent>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+        {[
+          "WiFi",
+          "Water",
+          "Electricity",
+          "Security",
+          "Parking",
+          "Laundry",
+          "Kitchen",
+          "CCTV",
+          "Study Area",
+          "Hot Shower",
+        ].map((amenity) => (
+
+          <div
+            key={amenity}
+            className="flex items-center space-x-2"
+          >
+
+            <Checkbox
+              checked={hostelData.amenities.includes(amenity)}
+              onCheckedChange={() => toggleAmenity(amenity)}
+            />
+
+            <Label>{amenity}</Label>
+
+          </div>
+
+        ))}
+
       </div>
 
     </CardContent>
