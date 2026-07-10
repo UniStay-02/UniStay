@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import Navbar from "src/components/Navbar";
 import { Search, MapPin, ShieldCheck, Wifi, BedDouble } from "lucide-react";
 
 export default function HomePage() {
   return (
     <div className="bg-white text-gray-800">
+      <Navbar />
       {/* Hero Section */}
       <section className="bg-[#0E1733] text-white">
         <div className="max-w-7xl mx-auto px-6 py-24 lg:flex items-center justify-between gap-12">
