@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "src/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 export default function AddHostel() {
