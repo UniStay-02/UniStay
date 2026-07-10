@@ -1,12 +1,59 @@
-import { FaUserCircle, FaEnvelope, FaPhone, FaUniversity, FaMapMarkerAlt, FaSignOutAlt, FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import {
+  FaUserCircle,
+  FaEnvelope,
+  FaPhone,
+  FaUniversity,
+  FaMapMarkerAlt,
+  FaSave,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const Profile = () => {
-  return (
-    <div className="min-h-screen bg-[#1D3A7A] py-10 px-6">
-      <div className="max-w-6xl mx-auto">
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    university: "",
+    campus: "",
+  });
 
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { fullName, email, phone, university, campus } = formData;
+
+    if (
+      !fullName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !university.trim() ||
+      !campus.trim()
+    ) {
+      setError("Please fill in all the required fields.");
+      return;
+    }
+
+    setError("");
+    alert("Profile updated successfully!");
+    console.log(formData);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0E1733] py-12 px-6">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="bg-[#153062] rounded-2xl shadow-lg p-8 flex flex-col md:flex-row justify-between items-center mb-8">
+        <div className="bg-[#15254D] rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-center gap-6 mb-10">
+          <FaUserCircle className="text-[100px] text-[#F98603]" />
 
           <div className="flex items-center gap-6">
             <FaUserCircle className="text-[120px] text-[#FF7A00]" />
@@ -21,72 +68,128 @@ const Profile = () => {
               </p>
             </div>
           </div>
-
-          <button className="mt-6 md:mt-0 bg-[#FF7A00] hover:bg-orange-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
-            <FaEdit />
-            Edit Profile
-          </button>
-
         </div>
 
-        {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold text-[#1D3A7A] mb-6 border-b-2 border-[#FF7A00] inline-block">
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl shadow-xl p-8"
+        >
+          <h2 className="text-2xl font-bold text-[#0E1733] mb-8 border-b-2 border-[#F98603] inline-block">
             Personal Information
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Full Name */}
+            <div>
+              <label className="flex items-center gap-2 mb-2 font-medium">
+                <FaUserCircle className="text-[#F98603]" />
+                Full Name
+              </label>
 
-            <div className="flex items-center gap-4">
-              <FaUserCircle className="text-[#FF7A00] text-3xl" />
-              <div>
-                <p className="text-gray-500">Full Name</p>
-                <h3 className="font-semibold">Derrick Weru</h3>
-              </div>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
+              />
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaEnvelope className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Email</p>
-                <h3 className="font-semibold">derrickweru@gmail.com</h3>
-              </div>
+            {/* Email */}
+            <div>
+              <label className="flex items-center gap-2 mb-2 font-medium">
+                <FaEnvelope className="text-[#F98603]" />
+                Email
+              </label>
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
+              />
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaPhone className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Phone</p>
-                <h3 className="font-semibold">+254 712 345 678</h3>
-              </div>
+            {/* Phone */}
+            <div>
+              <label className="flex items-center gap-2 mb-2 font-medium">
+                <FaPhone className="text-[#F98603]" />
+                Phone Number
+              </label>
+
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
+              />
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaUniversity className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">University</p>
-                <h3 className="font-semibold">University of Nairobi</h3>
-              </div>
+            {/* University */}
+            <div>
+              <label className="flex items-center gap-2 mb-2 font-medium">
+                <FaUniversity className="text-[#F98603]" />
+                University
+              </label>
+
+              <input
+                type="text"
+                name="university"
+                value={formData.university}
+                onChange={handleChange}
+                placeholder="Enter your university"
+                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
+              />
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaMapMarkerAlt className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Campus</p>
-                <h3 className="font-semibold">Main Campus</h3>
-              </div>
-            </div>
+            {/* Campus */}
+            <div className="md:col-span-2">
+              <label className="flex items-center gap-2 mb-2 font-medium">
+                <FaMapMarkerAlt className="text-[#F98603]" />
+                Campus / Location
+              </label>
 
+              <input
+                type="text"
+                name="campus"
+                value={formData.campus}
+                onChange={handleChange}
+                placeholder="Enter your campus or location"
+                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
+              />
+            </div>
           </div>
 
-          <button className="mt-10 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
-            <FaSignOutAlt />
-            Logout
-          </button>
+          {error && (
+            <p className="text-red-600 font-medium mt-6">
+              {error}
+            </p>
+          )}
 
-        </div>
+          <div className="flex gap-4 mt-8">
+            <button
+              type="submit"
+              className="bg-[#F98603] hover:bg-orange-500 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+            >
+              <FaSave />
+              Save Profile
+            </button>
 
+            <button
+              type="button"
+              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+            >
+              <FaSignOutAlt />
+              Logout
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
