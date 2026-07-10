@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import {
   Search,
   MapPin,
@@ -261,6 +262,7 @@ export default function Home() {
         </div>
 
       </section>
+      <Footer/>
 
     </div>
   );
