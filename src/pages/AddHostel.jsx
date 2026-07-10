@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import AdminNavbar from "@/components/AdminNavbar";
 
 
 export default function AddHostel() {
@@ -69,6 +70,7 @@ email: ""
 
   return (
     <div className="min-h-screen bg-slate-100 p-8">
+      <AdminNavbar/>
       <div className="max-w-4xl mx-auto">
 
         {/* Heading */}
