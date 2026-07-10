@@ -14,6 +14,16 @@ const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [toast, setToast] = useState(null); 
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+    
   return (
     <div>
 
