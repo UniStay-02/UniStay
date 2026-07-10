@@ -38,6 +38,9 @@ mapLink: "",
  rent: "",
   deposit: "",
   bookingFee: "",
+  ownerName: "",
+phone: "",
+email: ""
   });
 
   const handleChange = (field, value) => {
@@ -423,6 +426,44 @@ mapLink: "",
         />
       </div>
 
+    </CardContent>
+  </Card>
+)}
+{step === 6 && (
+  <Card>
+    <CardHeader>
+      <CardTitle>Contact Information</CardTitle>
+    </CardHeader>
+
+    <CardContent className="space-y-6">
+
+      <div>
+        <Label>Owner / Hostel Manager</Label>
+        <Input
+          placeholder="John Doe"
+          value={hostelData.ownerName}
+          onChange={(e) => handleChange("ownerName", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Phone Number</Label>
+        <Input
+          placeholder="0712345678"
+          value={hostelData.phone}
+          onChange={(e) => handleChange("phone", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Email Address</Label>
+        <Input
+          type="email"
+          placeholder="hostel@email.com"
+          value={hostelData.email}
+          onChange={(e) => handleChange("email", e.target.value)}
+        />
+      </div>
     </CardContent>
   </Card>
 )}
