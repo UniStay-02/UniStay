@@ -3,7 +3,7 @@ import { Building2, LayoutDashboard, PlusCircle, List, Users, LogOut } from "luc
 
  function AdminNavbar() {
   return (
-    <nav className="bg-[#0E1733] text-white shadow-md">
+    <nav className="bg-[#0E1733] sticky text-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
@@ -40,7 +40,7 @@ import { Building2, LayoutDashboard, PlusCircle, List, Users, LogOut } from "luc
           </Link>
 
           <Link
-            to="/users"
+            to="/manageusers"
             className="flex items-center gap-2 hover:text-yellow-300 transition"
           >
             <Users size={18} />
