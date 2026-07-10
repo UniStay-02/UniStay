@@ -3,6 +3,8 @@ import HostelDetails from './components/HostelDetails'
 import HomePage from './pages/HomePage'
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
+import AddHostel from './pages/AddHostel'
+
 function App() {
   return (
     <>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/hostels/:id" element={<HostelDetails/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/addhostel" element={<AddHostel/>} />
         
       </Routes>
     
