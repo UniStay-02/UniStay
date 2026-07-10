@@ -55,11 +55,18 @@ const Profile = () => {
         <div className="bg-[#15254D] rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-center gap-6 mb-10">
           <FaUserCircle className="text-[100px] text-[#F98603]" />
 
-          <div>
-            <h1 className="text-4xl font-bold text-white">My Profile</h1>
-            <p className="text-gray-300 mt-2">
-              Update your personal information.
-            </p>
+          <div className="flex items-center gap-6">
+            <FaUserCircle className="text-[120px] text-[#FF7A00]" />
+
+            <div>
+              <h1 className="text-4xl font-bold text-white">
+                Hello, Derrick 
+              </h1>
+
+              <p className="text-gray-300 mt-2">
+                Manage your profile information and bookings.
+              </p>
+            </div>
           </div>
         </div>
 

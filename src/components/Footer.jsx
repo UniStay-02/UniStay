@@ -11,10 +11,10 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0E1733] text-gray-300 mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-14">
-        <div className="grid gap-10 md:grid-cols-4">
-
+    <footer className="bg-zinc-900 text-gray-300 py-12 px-6 md:px-12 mt-auto">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2">
@@ -72,10 +72,10 @@ const Footer = () => {
             </h3>
 
             <div className="flex flex-col gap-3">
-              <p>Help Center</p>
-              <p>FAQs</p>
-              <p>Privacy Policy</p>
-              <p>Terms & Conditions</p>
+              <p className="hover:text-[#F98603] cursor-pointer transition">Help Center</p>
+              <p className="hover:text-[#F98603] cursor-pointer transition">FAQs</p>
+              <p className="hover:text-[#F98603] cursor-pointer transition">Privacy Policy</p>
+              <p className="hover:text-[#F98603] cursor-pointer transition">Terms & Conditions</p>
             </div>
           </div>
 
@@ -86,7 +86,6 @@ const Footer = () => {
             </h3>
 
             <div className="space-y-4">
-
               <div className="flex items-center gap-3">
                 <MapPin className="text-[#F98603]" size={18} />
                 <span>Nairobi, Kenya</span>
@@ -107,7 +106,6 @@ const Footer = () => {
                 <Instagram className="cursor-pointer hover:text-[#F98603] transition" />
                 <Twitter className="cursor-pointer hover:text-[#F98603] transition" />
               </div> */}
-
             </div>
           </div>
 
@@ -116,7 +114,6 @@ const Footer = () => {
         <hr className="border-gray-700 my-10" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-
           <p>
             © 2026 UniStay. All rights reserved.
           </p>
@@ -124,7 +121,6 @@ const Footer = () => {
           <p className="mt-3 md:mt-0">
             Designed for students 
           </p>
-
         </div>
       </div>
     </footer>
