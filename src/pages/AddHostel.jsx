@@ -56,7 +56,7 @@ export default function AddHostel() {
 
         <div className="mb-8">
 
-          <h1 className="text-3xl font-bold text-red-900">
+          <h1 className="text-3xl font-bold text-blue-900">
             Add New Hostel
           </h1>
 
@@ -230,8 +230,80 @@ export default function AddHostel() {
 
           </Card>
         )}
+{step === 2 && (
+  <Card>
+    <CardHeader>
+      <CardTitle>Hostel Photos</CardTitle>
+    </CardHeader>
 
+    <CardContent className="space-y-6">
+
+      <div>
+        <label className="block text-sm font-medium mb-2">
+          Cover Image
+        </label>
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleCoverImage}
+          className="w-full border rounded-md p-2"
+        />
+
+        {hostelData.coverImage && (
+          <p className="text-sm text-green-600 mt-2">
+            {hostelData.coverImage.name}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-2">
+          Gallery Images
+        </label>
+
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleGalleryImages}
+          className="w-full border rounded-md p-2"
+        />
+
+        {hostelData.galleryImages.length > 0 && (
+          <div className="mt-3 space-y-1">
+            {hostelData.galleryImages.map((image, index) => (
+              <p
+                key={index}
+                className="text-sm text-gray-600"
+              >
+                📷 {image.name}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+
+    </CardContent>
+  </Card>
+)}
          </div>
+         <div className="flex justify-between mt-8">
+  <Button
+    variant="outline"
+    disabled={step === 1}
+    onClick={() => setStep(step - 1)}
+  >
+    Previous
+  </Button>
+
+  <Button
+    onClick={() => setStep(step + 1)}
+  >
+    Next
+  </Button>
+</div>
     </div>
+    
   );
 }
