@@ -19,9 +19,18 @@ function Register() {
 
   const handleChange = (e) => {
 setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  
+  };
+ const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+ 
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+ 
+    setIsSubmitting(true);
   return (
     <div>
 
