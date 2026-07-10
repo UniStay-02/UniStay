@@ -7,31 +7,44 @@ import {
   BedDouble,
   ArrowRight,
 } from "lucide-react";
+import Navbar from "@/components/Navbar";
+
 
 export default function Home() {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-slate-50">
 
-      {/* HERO */}
-      <section className="relative bg-[#0E1733] text-white">
-        <div className="max-w-7xl mx-auto px-6 py-24">
+      {/* Hero */}
+    <div className="bg-white text-gray-800">
+      <Navbar />
+      {/* Hero Section */}
+      <section className="bg-[#0E1733] text-white">
+        <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-orange-400 font-semibold mb-3">
+              Student Accommodation Platform
+            </p>
 
-            {/* LEFT */}
-            <div>
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Find Your
-                <span className="block text-[#F98603]">
-                  Perfect Hostel
-                </span>
-              </h1>
+            <h1 className="text-5xl font-bold leading-tight">
+              Find Your Perfect
+              <span className="text-orange-400"> Student Home</span>
+            </h1>
 
-              <p className="mt-6 text-lg text-gray-300 max-w-lg">
-                Search among hundreds of verified hostels near your university
-                and book your accommodation with confidence.
-              </p>
-            </div>
+            <p className="mt-6 text-gray-300 text-lg leading-8">
+              UniStay helps students discover verified hostels,
+              apartments and bedsitters near their university with
+              transparent pricing and trusted reviews.
+            </p>
+
+            <div className="mt-8 flex gap-4">
+              <Link
+                to="/properties"
+                className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+              >
+                Browse Listings
+                <ArrowRight size={18} />
+              </Link>
 
             {/* RIGHT */}
             <div>
@@ -264,6 +277,7 @@ export default function Home() {
       </section>
       <Footer/>
 
+    </div>
     </div>
   );
 }
