@@ -18,47 +18,48 @@ export default function Home() {
     <div className="bg-white text-gray-800">
       <Navbar />
       {/* Hero Section */}
-      <section className="bg-[#0E1733] text-white">
-        <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
+     <section className="bg-[#0E1733] text-white">
+  <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
 
-          <div>
-            <p className="text-orange-400 font-semibold mb-3">
-              Student Accommodation Platform
-            </p>
+    {/* LEFT */}
+    <div>
+      <p className="text-orange-400 font-semibold mb-3">
+        Student Accommodation Platform
+      </p>
 
-            <h1 className="text-5xl font-bold leading-tight">
-              Find Your Perfect
-              <span className="text-orange-400"> Student Home</span>
-            </h1>
+      <h1 className="text-5xl font-bold leading-tight">
+        Find Your Perfect
+        <span className="text-orange-400"> Student Home</span>
+      </h1>
 
-            <p className="mt-6 text-gray-300 text-lg leading-8">
-              UniStay helps students discover verified hostels,
-              apartments and bedsitters near their university with
-              transparent pricing and trusted reviews.
-            </p>
+      <p className="mt-6 text-gray-300 text-lg leading-8">
+        UniStay helps students discover verified hostels,
+        apartments and bedsitters near their university with
+        transparent pricing and trusted reviews.
+      </p>
 
-            <div className="mt-8 flex gap-4">
-              <Link
-                to="/properties"
-                className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
-              >
-                Browse Listings
-                <ArrowRight size={18} />
-              </Link>
+      <div className="mt-8 flex gap-4">
+        <Link
+          to="/properties"
+          className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+        >
+          Browse Listings
+          <ArrowRight size={18} />
+        </Link>
+      </div>
+    </div>
 
-            {/* RIGHT */}
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800"
-                alt="Hostel"
-                className="rounded-3xl shadow-xl w-full h-[420px] object-cover"
-              />
-            </div>
+    {/* RIGHT */}
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800"
+        alt="Hostel"
+        className="rounded-3xl shadow-xl w-full h-[420px] object-cover"
+      />
+    </div>
 
-          </div>
-
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* SEARCH */}
       <section className="-mt-10 relative z-10">
