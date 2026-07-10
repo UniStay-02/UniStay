@@ -74,7 +74,7 @@ UniStay/
 |   |   ├── BookingForm.jsx
 │   │   │
 │   │   └── admin/
-│   │       ├── Dashboard.jsx
+│   │       ├── AdminDash.jsx
 │   │       ├── AddHostel.jsx
 │   │       ├── EditHostel.jsx
 │   │       ├── ManageUsers.jsx
