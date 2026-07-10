@@ -73,10 +73,130 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
   return (
-    <div>
-
-
+       <div className="register-page">
+      {/* Toast */}
+      {toast && (
+        <div className="toast">
+          <CheckCircle2 className="toast-icon" />
+          <span className="toast-text">Account created for {toast.name}</span>
+        </div>
+      )}
+ 
+      <Card className="card">
+        <CardHeader className="card-header">
+          <CardTitle className="card-title">
+            Create an account
+          </CardTitle>
+          <CardDescription className="card-description">
+            Enter your details below to set up your profile
+          </CardDescription>
+        </CardHeader>
+ 
+        <form onSubmit={handleSubmit}>
+          <CardContent className="card-content">
+            {error && (
+              <div className="error-banner">
+                {error}
+              </div>
+            )}
+ 
+            <div className="field-group">
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="John Doe"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                className="field-input"
+              />
+            </div>
+ 
+            <div className="field-group">
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="name@example.com"
+                autoComplete="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                className="field-input"
+              />
+            </div>
+ 
+            <div className="field-group">
+              <Label htmlFor="password">Password</Label>
+              <div className="password-wrapper">
+                <Input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="field-input password-input"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="password-toggle"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
+            </div>
+ 
+            <div className="field-group">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showPassword ? 'text' : 'password'}
+                required
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                className="field-input"
+              />
+            </div>
+          </CardContent>
+ 
+          <CardFooter className="card-footer">
+            <Button
+              type="submit"
+              className="submit-button"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="spinner" />
+                  Creating Account...
+                </>
+              ) : (
+                'Create Account'
+              )}
+            </Button>
+ 
+            <p className="footer-text">
+              Already have an account?{' '}
+              <Link to="/login" className="footer-link">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </form>
+      </Card>
     </div>
+
   )
 }
 
