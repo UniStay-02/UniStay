@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-function Navbar(){
-    const [open, setOpen] = useState(false);
+function Navbar() {
+  const [open, setOpen] = useState(false);
 
   return (
     <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        
         {/* Logo */}
         <Link
           to="/"
@@ -74,6 +75,7 @@ function Navbar(){
         <button
           className="md:hidden"
           onClick={() => setOpen(!open)}
+          aria-label="Toggle Menu"
         >
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -136,4 +138,5 @@ function Navbar(){
     </nav>
   );
 }
+
 export default Navbar;
