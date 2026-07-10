@@ -1,92 +1,95 @@
-import { FaUserCircle, FaEnvelope, FaPhone, FaUniversity, FaMapMarkerAlt, FaSignOutAlt, FaEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import StudentForm from "../components/StudentForm";
+import StudentInfo from "../components/StudentInfo";
+import HostelBooked from "../components/HostelBooked";
+import PaymentCard from "../components/PaymentCard";
+import AnnouncementCard from "../components/AnnouncementCard";
 
 const Profile = () => {
+  const { user } = useAuth();
+
+  const [student, setStudent] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const savedProfile = localStorage.getItem(`studentProfile_${user.email}`);
+
+    if (savedProfile) {
+      setStudent(JSON.parse(savedProfile));
+    }
+  }, [user]);
+
+  const handleSave = (studentData) => {
+    if (!user) return;
+
+    localStorage.setItem(
+      `studentProfile_${user.email}`,
+      JSON.stringify(studentData),
+    );
+
+    setStudent(studentData);
+    setShowSuccess(true);
+
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 2000);
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1733] text-white">
+        <h2>Please login to access your profile.</h2>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#1D3A7A] py-10 px-6">
+    <div className="min-h-screen bg-[#0E1733] py-10 px-6">
       <div className="max-w-6xl mx-auto">
+        {showSuccess && (
+          <div className="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+            ✅ Profile saved successfully!
+          </div>
+        )}
 
-        {/* Header */}
-        <div className="bg-[#153062] rounded-2xl shadow-lg p-8 flex flex-col md:flex-row justify-between items-center mb-8">
+        {!student ? (
+          <StudentForm onSave={handleSave} />
+        ) : (
+          <div className="space-y-6">
+            {/* Dashboard Header */}
+            <div className="bg-[#15254D] rounded-2xl shadow-lg p-8 text-white">
+              <h1 className="text-3xl font-bold">Student Dashboard</h1>
 
-          <div className="flex items-center gap-6">
-            <FaUserCircle className="text-[120px] text-[#FF7A00]" />
+              <p className="mt-2 text-lg">
+                Welcome back,
+                <span className="text-[#F98603] font-semibold">
+                  {" "}
+                  {student.fullName}
+                </span>
+              </p>
 
-            <div>
-              <h1 className="text-4xl font-bold text-white">
-                Hello, Derrick 👋
-              </h1>
-
-              <p className="text-gray-300 mt-2">
-                Manage your profile information and bookings.
+              <p className="mt-2 text-gray-300">
+                Manage your profile, hostel bookings, payments and stay updated
+                with the latest announcements.
               </p>
             </div>
+
+            {/* Student Information */}
+            <StudentInfo student={student} />
+
+            {/* Hostel Booking */}
+            <HostelBooked hostel={null} />
+
+            {/* Payment Information */}
+            <PaymentCard payment={null} />
+
+            {/* Admin Announcements */}
+            <AnnouncementCard announcements={[]} />
           </div>
-
-          <button className="mt-6 md:mt-0 bg-[#FF7A00] hover:bg-orange-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
-            <FaEdit />
-            Edit Profile
-          </button>
-
-        </div>
-
-        {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold text-[#1D3A7A] mb-6 border-b-2 border-[#FF7A00] inline-block">
-            Personal Information
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8 mt-6">
-
-            <div className="flex items-center gap-4">
-              <FaUserCircle className="text-[#FF7A00] text-3xl" />
-              <div>
-                <p className="text-gray-500">Full Name</p>
-                <h3 className="font-semibold">Derrick Weru</h3>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <FaEnvelope className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Email</p>
-                <h3 className="font-semibold">derrickweru@gmail.com</h3>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <FaPhone className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Phone</p>
-                <h3 className="font-semibold">+254 712 345 678</h3>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <FaUniversity className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">University</p>
-                <h3 className="font-semibold">University of Nairobi</h3>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <FaMapMarkerAlt className="text-[#FF7A00] text-2xl" />
-              <div>
-                <p className="text-gray-500">Campus</p>
-                <h3 className="font-semibold">Main Campus</h3>
-              </div>
-            </div>
-
-          </div>
-
-          <button className="mt-10 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
-            <FaSignOutAlt />
-            Logout
-          </button>
-
-        </div>
-
+        )}
       </div>
     </div>
   );
