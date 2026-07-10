@@ -9,8 +9,8 @@ import {
   Star,
   ArrowRight,
 } from "lucide-react";
-import Navbar from "src/components/Navbar";
-import { Search, MapPin, ShieldCheck, Wifi, BedDouble } from "lucide-react";
+import Navbar from "@/components/Navbar";
+
 
 export default function HomePage() {
   return (
