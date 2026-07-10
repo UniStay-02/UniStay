@@ -31,6 +31,9 @@ export default function AddHostel() {
 
     coverImage: null,
     galleryImages: [],
+    county: "",
+area: "",
+mapLink: "",
   });
 
   const handleChange = (field, value) => {
