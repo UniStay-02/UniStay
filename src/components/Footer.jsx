@@ -94,7 +94,7 @@ const Footer = () => {
 
               <div className="flex items-center gap-3">
                 <Phone className="text-[#F98603]" size={18} />
-                <span>+254 712 345 678</span>
+                <span>+254 704 019 505</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -122,7 +122,7 @@ const Footer = () => {
           </p>
 
           <p className="mt-3 md:mt-0">
-            Designed for students ❤️
+            Designed for students 
           </p>
 
         </div>
