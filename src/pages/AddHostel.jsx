@@ -35,6 +35,9 @@ export default function AddHostel() {
     county: "",
 area: "",
 mapLink: "",
+ rent: "",
+  deposit: "",
+  bookingFee: "",
   });
 
   const handleChange = (field, value) => {
@@ -377,6 +380,47 @@ mapLink: "",
 
         ))}
 
+      </div>
+
+    </CardContent>
+  </Card>
+)}
+{step === 5 && (
+  <Card>
+    <CardHeader>
+      <CardTitle>Pricing</CardTitle>
+    </CardHeader>
+
+    <CardContent className="space-y-6">
+
+      <div>
+        <Label>Monthly Rent (KES)</Label>
+        <Input
+          type="number"
+          placeholder="e.g. 8000"
+          value={hostelData.rent}
+          onChange={(e) => handleChange("rent", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Deposit (KES)</Label>
+        <Input
+          type="number"
+          placeholder="e.g. 5000"
+          value={hostelData.deposit}
+          onChange={(e) => handleChange("deposit", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Booking Fee (Optional)</Label>
+        <Input
+          type="number"
+          placeholder="e.g. 1000"
+          value={hostelData.bookingFee}
+          onChange={(e) => handleChange("bookingFee", e.target.value)}
+        />
       </div>
 
     </CardContent>
