@@ -42,6 +42,36 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
           password: formData.password,
         }),
       });
+
+         const data = await res.json();
+ 
+      // The server decides if the account can be created — not the client.
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to create an account.');
+      }
+ 
+      // Expecting the backend to return something like:
+      // { token: "...", user: { id, email, name, role } }
+      const { token, user } = data;
+ 
+      // Persist the real session so a page refresh doesn't log the user out.
+      // If AuthContext already handles this internally, these two lines are
+      // redundant and safe to remove.
+      localStorage.setItem('auth_token', token);
+      localStorage.setItem('auth_user', JSON.stringify(user));
+ 
+      register(token, user);
+ 
+      // Show a brief "Signed in as {name}" toast before redirecting.
+      setToast({ name: user.name });
+      setTimeout(() => {
+        navigate('/login');
+      }, 1200);
+    } catch (err) {
+      setError(err.message || 'Failed to create an account. Please try again.');
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div>
 
