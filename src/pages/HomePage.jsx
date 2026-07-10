@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import {
   Search,
   MapPin,
-  ShieldCheck,
-  Home,
-  BedDouble,
-  Wifi,
   Star,
+  BedDouble,
   ArrowRight,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 
-export default function HomePage() {
+export default function Home() {
   return (
     <div className="bg-slate-50">
 
@@ -48,100 +46,13 @@ export default function HomePage() {
                 <ArrowRight size={18} />
               </Link>
 
-              <Link
-                to="/register"
-                className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-[#0E1733] transition"
-              >
-                Join UniStay
-              </Link>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-xl p-6 text-black">
-            <h2 className="font-bold text-xl mb-5">
-              Search Accommodation
-            </h2>
-
-            <div className="space-y-4">
-
-              <div className="flex items-center border rounded-lg px-3">
-                <MapPin className="text-gray-400" size={18} />
-                <input
-                  type="text"
-                  placeholder="University or Location"
-                  className="w-full p-3 outline-none"
-                />
-              </div>
-
-              <div className="flex items-center border rounded-lg px-3">
-                <BedDouble className="text-gray-400" size={18} />
-                <select className="w-full p-3 outline-none bg-transparent">
-                  <option>Room Type</option>
-                  <option>Single Room</option>
-                  <option>Bedsitter</option>
-                  <option>Apartment</option>
-                  <option>Hostel</option>
-                </select>
-              </div>
-
-              <button className="w-full bg-[#0E1733] text-white py-3 rounded-lg hover:bg-[#16244f] transition flex justify-center items-center gap-2">
-                <Search size={18} />
-                Search
-              </button>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Features */}
-
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold">
-              Why Choose UniStay?
-            </h2>
-
-            <p className="text-gray-500 mt-3">
-              Making student housing simple, secure and stress-free.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            <div className="bg-white rounded-xl shadow p-8 text-center">
-              <ShieldCheck className="mx-auto text-orange-500" size={40} />
-              <h3 className="font-bold mt-5">Verified Listings</h3>
-              <p className="text-gray-500 mt-3">
-                Every property is reviewed before appearing on UniStay.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow p-8 text-center">
-              <Wifi className="mx-auto text-orange-500" size={40} />
-              <h3 className="font-bold mt-5">Modern Amenities</h3>
-              <p className="text-gray-500 mt-3">
-                Wi-Fi, water, electricity and secure compounds.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow p-8 text-center">
-              <Home className="mx-auto text-orange-500" size={40} />
-              <h3 className="font-bold mt-5">Affordable Housing</h3>
-              <p className="text-gray-500 mt-3">
-                Compare prices and choose accommodation within your budget.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow p-8 text-center">
-              <Star className="mx-auto text-orange-500" size={40} />
-              <h3 className="font-bold mt-5">Student Reviews</h3>
-              <p className="text-gray-500 mt-3">
-                Read genuine experiences before booking a room.
-              </p>
+            {/* RIGHT */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800"
+                alt="Hostel"
+                className="rounded-3xl shadow-xl w-full h-[420px] object-cover"
+              />
             </div>
 
           </div>
@@ -149,87 +60,222 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* SEARCH */}
+      <section className="-mt-10 relative z-10">
+        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-6">
 
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-4">
 
-          <h2 className="text-center text-4xl font-bold mb-14">
-            How UniStay Works
+            <input
+              type="text"
+              placeholder="Search hostel..."
+              className="border rounded-xl p-4"
+            />
+
+            <input
+              type="text"
+              placeholder="Location"
+              className="border rounded-xl p-4"
+            />
+
+            <select className="border rounded-xl p-4">
+              <option>Budget</option>
+              <option>Below KES 5,000</option>
+              <option>KES 5,000 - 8,000</option>
+              <option>Above KES 8,000</option>
+            </select>
+
+            <button className="bg-[#F98603] text-white rounded-xl flex items-center justify-center gap-2">
+              <Search size={20} />
+              Search
+            </button>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* FEATURED HOSTELS */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+
+        <div className="flex justify-between items-center mb-10">
+          <h2 className="text-4xl font-bold text-[#0E1733]">
+            Featured Hostels
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <Link
+            to="/hostels"
+            className="text-[#F98603] font-semibold flex items-center gap-2"
+          >
+            View All
+            <ArrowRight size={18} />
+          </Link>
+        </div>
 
-            <div className="text-center">
-              <div className="bg-orange-500 w-14 h-14 rounded-full mx-auto flex items-center justify-center text-white font-bold text-xl">
-                1
+        <div className="grid md:grid-cols-3 gap-8">
+
+          {[1,2,3].map((item)=>(
+            <div
+              key={item}
+              className="bg-white rounded-2xl shadow overflow-hidden"
+            >
+
+              <img
+                src={`https://picsum.photos/600/400?random=${item}`}
+                className="w-full h-56 object-cover"
+              />
+
+              <div className="p-6">
+
+                <h3 className="font-bold text-xl text-[#0E1733]">
+                  Sunrise Hostel
+                </h3>
+
+                <p className="flex items-center gap-2 mt-2 text-gray-500">
+                  <MapPin size={15}/>
+                  Eldoret
+                </p>
+
+                <div className="flex justify-between items-center mt-6">
+
+                  <span className="text-[#F98603] text-2xl font-bold">
+                    KES 6,500
+                  </span>
+
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <Star fill="currentColor" size={16}/>
+                    4.8
+                  </div>
+
+                </div>
+
+                <Link
+                  to="/hostels/1"
+                  className="mt-6 w-full bg-[#0E1733] text-white py-3 rounded-xl flex justify-center items-center gap-2"
+                >
+                  <BedDouble size={18}/>
+                  View Details
+                </Link>
+
               </div>
 
-              <h3 className="font-bold mt-5">
-                Search
-              </h3>
-
-              <p className="text-gray-500 mt-3">
-                Browse verified accommodation around your university.
-              </p>
             </div>
+          ))}
 
-            <div className="text-center">
-              <div className="bg-orange-500 w-14 h-14 rounded-full mx-auto flex items-center justify-center text-white font-bold text-xl">
-                2
+        </div>
+
+      </section>
+
+      {/* POPULAR LOCATIONS */}
+
+      <section className="bg-white py-24">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          <h2 className="text-4xl font-bold text-[#0E1733] mb-10">
+            Popular Locations
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-6">
+
+            {[
+              "Eldoret",
+              "Nakuru",
+              "Kisumu",
+              "Nairobi",
+            ].map((location)=>(
+              <div
+                key={location}
+                className="rounded-2xl overflow-hidden shadow"
+              >
+
+                <img
+                  src={`https://picsum.photos/500/300?${location}`}
+                  className="w-full h-44 object-cover"
+                />
+
+                <div className="p-5">
+
+                  <h3 className="font-bold text-xl">
+                    {location}
+                  </h3>
+
+                  <p className="text-gray-500 mt-2">
+                    100+ Hostels
+                  </p>
+
+                </div>
+
               </div>
-
-              <h3 className="font-bold mt-5">
-                Compare
-              </h3>
-
-              <p className="text-gray-500 mt-3">
-                Compare prices, amenities and student ratings.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-orange-500 w-14 h-14 rounded-full mx-auto flex items-center justify-center text-white font-bold text-xl">
-                3
-              </div>
-
-              <h3 className="font-bold mt-5">
-                Book
-              </h3>
-
-              <p className="text-gray-500 mt-3">
-                Contact landlords and reserve your next student home.
-              </p>
-            </div>
+            ))}
 
           </div>
 
         </div>
+
+      </section>
+
+      {/* TESTIMONIALS */}
+
+      <section className="bg-[#0E1733] text-white py-24">
+
+        <div className="max-w-6xl mx-auto px-6">
+
+          <h2 className="text-4xl font-bold text-center">
+            What Students Say
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-14">
+
+            {["Ian","Grace","Brian"].map((name)=>(
+              <div
+                key={name}
+                className="bg-white/10 rounded-2xl p-8"
+              >
+
+                <p className="text-gray-300">
+                  "UniStay helped me find a secure hostel near campus in just a few minutes."
+                </p>
+
+                <h4 className="mt-6 font-bold">
+                  {name}
+                </h4>
+
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+
       </section>
 
       {/* CTA */}
 
-      <section className="bg-[#0E1733] text-white py-20">
+      <section className="py-24 bg-white">
+
         <div className="max-w-5xl mx-auto text-center px-6">
 
-          <h2 className="text-4xl font-bold">
-            Ready to Find Your Next Home?
+          <h2 className="text-5xl font-bold text-[#0E1733]">
+            Ready to Find Your Next Hostel?
           </h2>
 
-          <p className="mt-5 text-gray-300 text-lg">
-            Join hundreds of students using UniStay to discover safe,
-            affordable accommodation.
+          <p className="text-gray-600 mt-6 text-lg">
+            Browse verified hostels and secure your accommodation today.
           </p>
 
           <Link
-            to="/register"
-            className="inline-block mt-8 bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold transition"
+            to="/hostels"
+            className="inline-flex items-center gap-2 mt-10 bg-[#F98603] text-white px-8 py-4 rounded-xl font-semibold"
           >
-            Get Started
+            Explore Hostels
+            <ArrowRight size={18}/>
           </Link>
 
         </div>
+
       </section>
+      <Footer/>
 
     </div>
     </div>
