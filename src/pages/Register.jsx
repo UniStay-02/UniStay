@@ -14,8 +14,14 @@ function Register() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [toast, setToast] = useState(null); // { name: string } | null
+  const [toast, setToast] = useState(null); 
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  
   return (
     <div>
 
