@@ -287,6 +287,44 @@ export default function AddHostel() {
     </CardContent>
   </Card>
 )}
+{step === 3 && (
+  <Card>
+    <CardHeader>
+      <CardTitle>Location Details</CardTitle>
+    </CardHeader>
+
+    <CardContent className="space-y-6">
+
+      <div>
+        <Label>County</Label>
+        <Input
+          placeholder="e.g. Nairobi"
+          value={hostelData.county || ""}
+          onChange={(e) => handleChange("county", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Area / Town</Label>
+        <Input
+          placeholder="e.g. Rongai"
+          value={hostelData.area || ""}
+          onChange={(e) => handleChange("area", e.target.value)}
+        />
+      </div>
+
+      <div>
+        <Label>Google Maps Link</Label>
+        <Input
+          placeholder="Paste Google Maps link"
+          value={hostelData.mapLink || ""}
+          onChange={(e) => handleChange("mapLink", e.target.value)}
+        />
+      </div>
+
+    </CardContent>
+  </Card>
+)}
          </div>
          <div className="flex justify-between mt-8">
   <Button
