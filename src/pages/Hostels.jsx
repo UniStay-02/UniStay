@@ -11,7 +11,7 @@ import {
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getProperties } from "@/services/rentcast";
+import { getHostelImages } from "@/services/unsplash";
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
@@ -28,24 +28,20 @@ export default function Hostels() {
   const [roomType, setRoomType] = useState("");
   const [budget, setBudget] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    async function loadProperties() {
-      try {
-        const data = await getProperties();
-
-        setProperties(data);
-        setFilteredProperties(data);
-      } catch (err) {
-        console.error(err);
-        setError("Unable to load hostels.");
-      } finally {
-        setLoading(false);
-      }
+  async function loadImages() {
+    try {
+      const data = await getHostelImages(20);
+      setImages(data);
+    } catch (err) {
+      console.error(err);
     }
+  }
 
-    loadProperties();
-  }, []);
+  loadImages();
+}, []);
 
   useEffect(() => {
     let results = [...properties];
