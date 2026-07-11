@@ -12,6 +12,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getHostelImages } from "@/services/unsplash";
+import { getProperties } from "@/services/rentcast";
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
@@ -30,19 +31,40 @@ export default function Hostels() {
   const [sortBy, setSortBy] = useState("");
   const [images, setImages] = useState([]);
 
+  // Load hostel listings
   useEffect(() => {
-  async function loadImages() {
-    try {
-      const data = await getHostelImages(20);
-      setImages(data);
-    } catch (err) {
-      console.error(err);
+    async function loadProperties() {
+      try {
+        setLoading(true);
+        setError("");
+        const data = await getProperties();
+        setProperties(data || []);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load hostels. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  loadImages();
-}, []);
+    loadProperties();
+  }, []);
 
+  // Load images (used as fallback covers for listings)
+  useEffect(() => {
+    async function loadImages() {
+      try {
+        const data = await getHostelImages(20);
+        setImages(data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadImages();
+  }, []);
+
+  // Filter + sort
   useEffect(() => {
     let results = [...properties];
 
@@ -56,10 +78,23 @@ export default function Hostels() {
 
     if (location) {
       results = results.filter((property) =>
-        property.city
-          ?.toLowerCase()
-          .includes(location.toLowerCase())
+        property.city?.toLowerCase().includes(location.toLowerCase())
       );
+    }
+
+    if (roomType) {
+      results = results.filter(
+        (property) => property.roomType === roomType
+      );
+    }
+
+    if (budget) {
+      const [min, max] = budget.split("-").map((v) => parseInt(v, 10));
+      results = results.filter((property) => {
+        const price = property.price ?? 0;
+        if (budget === "10000+") return price > 10000;
+        return price >= min && price <= max;
+      });
     }
 
     if (sortBy === "newest") {
@@ -67,9 +102,7 @@ export default function Hostels() {
     }
 
     if (sortBy === "bedrooms") {
-      results.sort(
-        (a, b) => (b.bedrooms || 0) - (a.bedrooms || 0)
-      );
+      results.sort((a, b) => (b.bedrooms || 0) - (a.bedrooms || 0));
     }
 
     setFilteredProperties(results);
@@ -80,38 +113,24 @@ export default function Hostels() {
       <Navbar />
 
       {/* Header */}
-
-      <section
-        className="py-16"
-        style={{ backgroundColor: NAVY }}
-      >
+      <section className="py-16" style={{ backgroundColor: NAVY }}>
         <div className="max-w-7xl mx-auto px-6">
-
-          <h1 className="text-5xl font-bold text-white">
-            Browse Hostels
-          </h1>
+          <h1 className="text-5xl font-bold text-white">Browse Hostels</h1>
 
           <p className="text-white/70 mt-4 max-w-xl">
-            Find verified hostels, bedsitters and apartments
-            near your university.
+            Find verified hostels, bedsitters and apartments near your
+            university.
           </p>
-
         </div>
       </section>
 
       {/* Search */}
-
       <section className="-mt-10">
         <div className="max-w-7xl mx-auto px-6">
-
           <div className="bg-white rounded-xl shadow-lg p-6">
-
             <div className="grid lg:grid-cols-5 gap-4">
-
               {/* Search */}
-
               <div className="relative">
-
                 <Search
                   size={18}
                   className="absolute left-3 top-4 text-gray-400"
@@ -124,13 +143,10 @@ export default function Hostels() {
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full border rounded-lg py-3 pl-10 pr-4 outline-none"
                 />
-
               </div>
 
               {/* Location */}
-
               <div className="relative">
-
                 <MapPin
                   size={18}
                   className="absolute left-3 top-4 text-gray-400"
@@ -140,118 +156,68 @@ export default function Hostels() {
                   type="text"
                   placeholder="Location"
                   value={location}
-                  onChange={(e) =>
-                    setLocation(e.target.value)
-                  }
+                  onChange={(e) => setLocation(e.target.value)}
                   className="w-full border rounded-lg py-3 pl-10 pr-4 outline-none"
                 />
-
               </div>
 
               {/* Room Type */}
-
               <div>
-
                 <select
                   value={roomType}
-                  onChange={(e) =>
-                    setRoomType(e.target.value)
-                  }
+                  onChange={(e) => setRoomType(e.target.value)}
                   className="w-full border rounded-lg py-3 px-4 outline-none"
                 >
-                  <option value="">
-                    Any Room Type
-                  </option>
-
+                  <option value="">Any Room Type</option>
                   <option>Bedsitter</option>
-
                   <option>Single Room</option>
-
                   <option>One Bedroom</option>
-
                   <option>Two Bedroom</option>
-
                 </select>
-
               </div>
 
               {/* Budget */}
-
               <div>
-
                 <select
                   value={budget}
-                  onChange={(e) =>
-                    setBudget(e.target.value)
-                  }
+                  onChange={(e) => setBudget(e.target.value)}
                   className="w-full border rounded-lg py-3 px-4 outline-none"
                 >
-                  <option value="">
-                    Any Budget
-                  </option>
-
-                  <option>0-5000</option>
-
-                  <option>5000-10000</option>
-
-                  <option>10000+</option>
-
+                  <option value="">Any Budget</option>
+                  <option value="0-5000">0-5000</option>
+                  <option value="5000-10000">5000-10000</option>
+                  <option value="10000+">10000+</option>
                 </select>
-
               </div>
 
               {/* Sort */}
-
               <div>
-
                 <select
                   value={sortBy}
-                  onChange={(e) =>
-                    setSortBy(e.target.value)
-                  }
+                  onChange={(e) => setSortBy(e.target.value)}
                   className="w-full border rounded-lg py-3 px-4 outline-none"
                 >
-                  <option value="">
-                    Sort By
-                  </option>
-
-                  <option value="newest">
-                    Newest
-                  </option>
-
-                  <option value="bedrooms">
-                    Most Bedrooms
-                  </option>
-
+                  <option value="">Sort By</option>
+                  <option value="newest">Newest</option>
+                  <option value="bedrooms">Most Bedrooms</option>
                 </select>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
       </section>
 
       {/* Results */}
-
       <section className="py-14">
         <div className="max-w-7xl mx-auto px-6">
-
           <div className="flex items-center justify-between mb-8">
-
-            <h2
-              className="text-3xl font-bold"
-              style={{ color: NAVY }}
-            >
+            <h2 className="text-3xl font-bold" style={{ color: NAVY }}>
               Available Hostels
             </h2>
 
             <span className="text-gray-500">
               {filteredProperties.length} Results
             </span>
-
           </div>
 
           {loading && (
@@ -260,12 +226,11 @@ export default function Hostels() {
             </div>
           )}
 
-          {error && (
-            <div className="text-center py-20 text-red-500">
-              {error}
-            </div>
+          {!loading && error && (
+            <div className="text-center py-20 text-red-500">{error}</div>
           )}
-                    {!loading && !error && (
+
+          {!loading && !error && (
             <>
               {filteredProperties.length === 0 ? (
                 <div className="text-center py-20">
@@ -286,7 +251,11 @@ export default function Hostels() {
                     >
                       <div className="relative">
                         <img
-                          src={`https://picsum.photos/600/450?random=${index + 1}`}
+                          src={
+                            property.imageUrl ||
+                            images[index % images.length] ||
+                            `https://picsum.photos/600/450?random=${index + 1}`
+                          }
                           alt={property.formattedAddress}
                           className="w-full h-56 object-cover"
                         />
@@ -303,16 +272,12 @@ export default function Hostels() {
                       </div>
 
                       <div className="p-5">
-                        <h3
-                          className="text-lg font-bold"
-                          style={{ color: NAVY }}
-                        >
+                        <h3 className="text-lg font-bold" style={{ color: NAVY }}>
                           {property.formattedAddress}
                         </h3>
 
                         <div className="flex items-center gap-2 mt-3 text-gray-500">
                           <MapPin size={16} />
-
                           <span>
                             {property.city}, {property.state}
                           </span>
@@ -320,18 +285,12 @@ export default function Hostels() {
 
                         <div className="flex items-center gap-2 mt-3 text-gray-500">
                           <BedDouble size={16} />
-
-                          <span>
-                            {property.bedrooms ?? "-"} Bedrooms
-                          </span>
+                          <span>{property.bedrooms ?? "-"} Bedrooms</span>
                         </div>
 
                         <div className="flex items-center gap-2 mt-2 text-gray-500">
                           <Wallet size={16} />
-
-                          <span>
-                            {property.bathrooms ?? "-"} Bathrooms
-                          </span>
+                          <span>{property.bathrooms ?? "-"} Bathrooms</span>
                         </div>
 
                         <div className="mt-5 flex items-center justify-between">
@@ -340,10 +299,7 @@ export default function Hostels() {
                               Property ID
                             </p>
 
-                            <h4
-                              className="font-bold"
-                              style={{ color: ORANGE }}
-                            >
+                            <h4 className="font-bold" style={{ color: ORANGE }}>
                               #{property.id}
                             </h4>
                           </div>
@@ -368,19 +324,15 @@ export default function Hostels() {
       </section>
 
       {/* Call To Action */}
-
-      <section
-        className="py-20"
-        style={{ backgroundColor: NAVY }}
-      >
+      <section className="py-20" style={{ backgroundColor: NAVY }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white">
             Can't Find Your Ideal Hostel?
           </h2>
 
           <p className="mt-5 text-white/70">
-            New hostels are added every day. Check back often or
-            contact us for assistance.
+            New hostels are added every day. Check back often or contact us
+            for assistance.
           </p>
 
           <Link
@@ -401,5 +353,3 @@ export default function Hostels() {
     </div>
   );
 }
-
-         
