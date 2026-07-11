@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
