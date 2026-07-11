@@ -10,6 +10,9 @@ const navLinks = [
 ];
 
  function AdminNavbar() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <nav className="bg-[#0E1733] sticky text-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
