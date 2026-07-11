@@ -88,16 +88,16 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
                 id="name"
                 name="name"
                 type="text"
-                placeholder="John Doe"
+                placeholder="John Dean"
                 required
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                className="field-input"
+                className="focus-visible:ring-[#0E1733]"
               />
             </div>
  
-            <div className="field-group">
+            <div className="grid gap-2">
               <Label htmlFor="email">Email address</Label>
               <Input
                 id="email"
@@ -109,11 +109,11 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                className="field-input"
+                className="focus-visible:ring-[#0E1733]"
               />
             </div>
  
-            <div className="field-group">
+            <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <div className="password-wrapper">
                 <Input
@@ -124,20 +124,20 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
                   value={formData.password}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="field-input password-input"
+                  className="pr-10 focus-visible:ring-[#0E1733]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="password-toggle"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  
                 </button>
               </div>
             </div>
  
-            <div className="field-group">
+            <div className="grid gap-2">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
                 id="confirmPassword"
@@ -147,20 +147,20 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                className="field-input"
+                className="focus-visible:ring-[#0E1733]"
               />
             </div>
           </CardContent>
  
-          <CardFooter className="card-footer">
+          <CardFooter className="flex flex-col gap-4 mt-2">
             <Button
               type="submit"
-              className="submit-button"
+              className="w-full font-medium bg-[#0E1733] hover:bg-[#0E1733]/90 text-white"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="spinner" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Creating Account...
                 </>
               ) : (
@@ -168,9 +168,9 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
               )}
             </Button>
  
-            <p className="footer-text">
+            <p className="text-sm text-center text-muted-foreground w-full">
               Already have an account?{' '}
-              <Link to="/login" className="footer-link">
+              <Link to="/login" className="font-medium text-[#0E1733] hover:text-[#F98603] hover:underline">
                 Sign in
               </Link>
             </p>
