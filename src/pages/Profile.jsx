@@ -5,9 +5,12 @@ import StudentInfo from "../components/StudentInfo";
 import HostelBooked from "../components/HostelBooked";
 import PaymentCard from "../components/PaymentCard";
 import AnnouncementCard from "../components/AnnouncementCard";
+import { useNavigate } from "react-router-dom";
+import { FaEdit, FaSignOutAlt } from "react-icons/fa";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const [student, setStudent] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -43,6 +46,11 @@ const Profile = () => {
     setTimeout(() => {
       setShowSuccess(false);
     }, 2000);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   if (!user) {
@@ -88,12 +96,23 @@ const Profile = () => {
                   </p>
                 </div>
 
-                <button
-                  onClick={() => setIsEditing(true)}
-                  className="bg-[#F98603] hover:bg-orange-500 px-6 py-3 rounded-lg font-semibold transition"
-                >
-                  Edit Profile
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className="bg-[#F98603] hover:bg-orange-500 text-white px-5 py-3 rounded-lg flex items-center gap-2"
+                  >
+                    <FaEdit />
+                    Edit Profile
+                  </button>
+
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-lg flex items-center gap-2"
+                  >
+                    <FaSignOutAlt />
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
 

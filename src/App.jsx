@@ -9,6 +9,7 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
