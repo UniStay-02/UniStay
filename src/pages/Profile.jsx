@@ -10,8 +10,13 @@ const Profile = () => {
   const { user } = useAuth();
 
   const [student, setStudent] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [isEditing, setIsEditing] = useState(false)
+
+  // Demo data (replace later with data from your teammates)
+  const [hostel] = useState(null);
+  const [payment] = useState(null);
+  const [announcements] = useState([]);
 
   useEffect(() => {
     if (!user) return;
@@ -32,8 +37,8 @@ const Profile = () => {
     );
 
     setStudent(studentData);
-    setShowSuccess(true);
     setIsEditing(false);
+    setShowSuccess(true);
 
     setTimeout(() => {
       setShowSuccess(false);
@@ -42,8 +47,10 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E1733] text-white">
-        <h2>Please login to access your profile.</h2>
+      <div className="min-h-screen bg-[#0E1733] flex items-center justify-center">
+        <h2 className="text-white text-2xl font-semibold">
+          Please login to access your profile.
+        </h2>
       </div>
     );
   }
@@ -52,56 +59,55 @@ const Profile = () => {
     <div className="min-h-screen bg-[#0E1733] py-10 px-6">
       <div className="max-w-6xl mx-auto">
         {showSuccess && (
-          <div className="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+          <div className="mb-6 rounded-lg bg-green-100 border border-green-400 text-green-700 px-4 py-3">
             ✅ Profile saved successfully!
           </div>
         )}
 
         {!student || isEditing ? (
-          <StudentForm 
-          student={student}
-          onSave={handleSave} />
+          <StudentForm student={student} onSave={handleSave} />
         ) : (
           <div className="space-y-6">
             {/* Dashboard Header */}
             <div className="bg-[#15254D] rounded-2xl shadow-lg p-8 text-white">
-              <h1 className="text-3xl font-bold">Student Dashboard</h1>
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                  <h1 className="text-3xl font-bold">Student Dashboard</h1>
 
-              <div className="flex justify-end">
-                <button 
-                onClick={() => setIsEditing(true)}
-                className="bg-[#F98603] hover:bg-orange-500 text-white px-g py-2 rounded-lg font-medium">
-                    Edit Profile
+                  <p className="mt-2 text-lg">
+                    Welcome back,
+                    <span className="text-[#F98603] font-semibold">
+                      {" "}
+                      {student.fullName}
+                    </span>
+                  </p>
 
+                  <p className="text-gray-300 mt-2">
+                    Manage your hostel profile, bookings, payments and keep
+                    track of announcements from the hostel administration.
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="bg-[#F98603] hover:bg-orange-500 px-6 py-3 rounded-lg font-semibold transition"
+                >
+                  Edit Profile
                 </button>
-
               </div>
-
-              <p className="mt-2 text-lg">
-                Welcome back,
-                <span className="text-[#F98603] font-semibold">
-                  {" "}
-                  {student.fullName}
-                </span>
-              </p>
-
-              <p className="mt-2 text-gray-300">
-                Manage your profile, hostel bookings, payments and stay updated
-                with the latest announcements.
-              </p>
             </div>
 
             {/* Student Information */}
             <StudentInfo student={student} />
 
             {/* Hostel Booking */}
-            <HostelBooked hostel={null} />
+            <HostelBooked hostel={hostel} />
 
             {/* Payment Information */}
-            <PaymentCard payment={null} />
+            <PaymentCard payment={payment} />
 
             {/* Admin Announcements */}
-            <AnnouncementCard announcements={[]} />
+            <AnnouncementCard announcements={announcements} />
           </div>
         )}
       </div>
