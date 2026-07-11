@@ -51,7 +51,10 @@ const navLinks = [
  
 
         {/* Logout */}
-        <button className="flex items-center gap-2 bg-white text-red-900 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+      <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 bg-white text-[#0E1733] px-4 py-2 rounded-lg hover:bg-[#F98603] hover:text-white transition cursor-pointer"
+        >
           <LogOut size={18} />
           Logout
         </button>
