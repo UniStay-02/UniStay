@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import AddHostel from './pages/AddHostel'
+import ManageUsers from './pages/ManageUsers'
+import ManageBookings from './pages/ManageBookings'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/addhostel" element={<AddHostel/>} />
+        <Route path="/manageusers" element={<ManageUsers/>} />
+        <Route path="/managebookings" element={<ManageBookings/>} />
         
       </Routes>
     
