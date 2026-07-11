@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Building2, LayoutDashboard, PlusCircle, List, Users, LogOut } from "lucide-react";
-
+import { useAuth } from "@/context/AuthContext";
  function AdminNavbar() {
   return (
     <nav className="bg-[#0E1733] sticky text-white shadow-md">
