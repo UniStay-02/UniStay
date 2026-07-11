@@ -2,61 +2,48 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
+export const AuthProvider = ({ children }) => {
+  // Get logged-in user from localStorage
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("unistayUser");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  // Load logged-in user when app starts
+  // Save user whenever it changes
   useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-
     if (user) {
-      setCurrentUser(JSON.parse(user));
+      localStorage.setItem("unistayUser", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("unistayUser");
     }
-  }, []);
+  }, [user]);
 
-  // Register a new user
-  const register = (userData) => {
-    localStorage.setItem("registeredUser", JSON.stringify(userData));
+  // Login function
+  const login = (userData) => {
+    setUser(userData);
   };
 
-  // Login
-  const login = (email, password) => {
-    const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
-
-    if (
-      storedUser &&
-      storedUser.email === email &&
-      storedUser.password === password
-    ) {
-      setCurrentUser(storedUser);
-      localStorage.setItem("currentUser", JSON.stringify(storedUser));
-      return true;
-    }
-
-    return false;
-  };
-
-  // Logout
+  // Logout function
   const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("currentUser");
+    setUser(null);
+    localStorage.removeItem("unistayUser");
   };
 
   return (
     <AuthContext.Provider
       value={{
-        currentUser,
-        register,
+        user,
         login,
         logout,
+        isAuthenticated: !!user,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-// Custom Hook
-export function useAuth() {
+// Custom hook
+export const useAuth = () => {
   return useContext(AuthContext);
-}
+};
