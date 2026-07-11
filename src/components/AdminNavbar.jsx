@@ -29,41 +29,26 @@ const navLinks = [
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8">
-
-          <Link
-            to="/admindash"
-            className="flex items-center gap-2 hover:text-yellow-300 transition"
-          >
-            <LayoutDashboard size={18} />
-            Dashboard
-          </Link>
-
-          <Link
-            to="/addhostel"
-            className="flex items-center gap-2 hover:text-yellow-300 transition"
-          >
-            <PlusCircle size={18} />
-            Add Hostel
-          </Link>
-
-          <Link
-            to="/managebookings"
-            className="flex items-center gap-2 hover:text-yellow-300 transition"
-          >
-            <List size={18} />
-            Bookings
-          </Link>
-
-          <Link
-            to="/manageusers"
-            className="flex items-center gap-2 hover:text-yellow-300 transition"
-          >
-            <Users size={18} />
-            Users
-          </Link>
-
+         <div className="hidden md:flex items-center gap-8">
+          {navLinks.map(({ to, label, icon: Icon }) => {
+            const isActive = location.pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-2 pb-1 border-b-2 transition ${
+                  isActive
+                    ? "text-[#F98603] border-[#F98603] font-semibold"
+                    : "border-transparent hover:text-[#F98603]"
+                }`}
+              >
+                <Icon size={18} />
+                {label}
+              </Link>
+            );
+          })}
         </div>
+ 
 
         {/* Logout */}
         <button className="flex items-center gap-2 bg-white text-red-900 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
