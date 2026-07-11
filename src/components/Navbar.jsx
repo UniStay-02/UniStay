@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ function Navbar() {
   return (
     <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
+
         {/* Logo */}
         <Link
           to="/"
@@ -59,24 +60,56 @@ function Navbar() {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link
-            to="/login"
-            className="border border-white px-5 py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition"
-          >
-            Login
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/profile"
+                className="hover:text-[#F98603] transition font-medium"
+              >
+                Hi, {user?.name || "there"}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="border border-white px-5 py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition cursor-pointer"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="border border-white px-5 py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition"
+              >
+                Login
+              </Link>
 
-          <Link
-            to="/register"
-            className="bg-[#F98603] hover:bg-orange-500 px-5 py-2 rounded-lg font-semibold transition"
-          >
-            Register
-          </Link>
+              <Link
+                to="/register"
+                className="bg-[#F98603] hover:bg-orange-500 px-5 py-2 rounded-lg font-semibold transition"
+              >
+                Register
+              </Link>
+              <Link
+                to="/profile"
+                className="hover:text-[#F98603] transition font-medium"
+              >
+                Hi, {user?.name || "there"}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="border border-white px-5 py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition cursor-pointer"
+              >
+                Log out
+              </button>
+            </>
+          )}
+
           <Link
             to="/addhostel"
             className="bg-[#F98603] hover:bg-orange-500 px-5 py-2 rounded-lg font-semibold transition"
           >
-           Add hostel
+            Add hostel
           </Link>
         </div>
 
@@ -125,23 +158,52 @@ function Navbar() {
             Contact
           </Link>
 
+          <Link
+            to="/addhostel"
+            className="block hover:text-[#F98603]"
+            onClick={() => setOpen(false)}
+          >
+            Add Hostel
+          </Link>
+
           <hr className="border-gray-600" />
 
-          <Link
-            to="/login"
-            className="block text-center border border-white py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition"
-            onClick={() => setOpen(false)}
-          >
-            Login
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/profile"
+                className="block text-center hover:text-[#F98603]"
+                onClick={() => setOpen(false)}
+              >
+                Hi, {user?.name || "there"}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-center border border-white py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition cursor-pointer"
+              >
+                Log out
+              </button>
 
-          <Link
-            to="/register"
-            className="block text-center bg-[#F98603] py-2 rounded-lg font-semibold hover:bg-orange-500 transition"
-            onClick={() => setOpen(false)}
-          >
-            Register
-          </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="block text-center border border-white py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="block text-center bg-[#F98603] py-2 rounded-lg font-semibold hover:bg-orange-500 transition"
+                onClick={() => setOpen(false)}
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>
