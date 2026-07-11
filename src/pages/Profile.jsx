@@ -11,6 +11,7 @@ const Profile = () => {
 
   const [student, setStudent] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
 
   useEffect(() => {
     if (!user) return;
@@ -32,6 +33,7 @@ const Profile = () => {
 
     setStudent(studentData);
     setShowSuccess(true);
+    setIsEditing(false);
 
     setTimeout(() => {
       setShowSuccess(false);
@@ -55,13 +57,25 @@ const Profile = () => {
           </div>
         )}
 
-        {!student ? (
-          <StudentForm onSave={handleSave} />
+        {!student || isEditing ? (
+          <StudentForm 
+          student={student}
+          onSave={handleSave} />
         ) : (
           <div className="space-y-6">
             {/* Dashboard Header */}
             <div className="bg-[#15254D] rounded-2xl shadow-lg p-8 text-white">
               <h1 className="text-3xl font-bold">Student Dashboard</h1>
+
+              <div className="flex justify-end">
+                <button 
+                onClick={() => setIsEditing(true)}
+                className="bg-[#F98603] hover:bg-orange-500 text-white px-g py-2 rounded-lg font-medium">
+                    Edit Profile
+
+                </button>
+
+              </div>
 
               <p className="mt-2 text-lg">
                 Welcome back,
