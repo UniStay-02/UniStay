@@ -1,6 +1,14 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Building2, LayoutDashboard, PlusCircle, List, Users, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+
+const navLinks = [
+  { to: "/admindash", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/addhostel", label: "Add Hostel", icon: PlusCircle },
+  { to: "/managebookings", label: "Bookings", icon: List },
+  { to: "/manageusers", label: "Users", icon: Users },
+];
+
  function AdminNavbar() {
   return (
     <nav className="bg-[#0E1733] sticky text-white shadow-md">
