@@ -55,34 +55,34 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
   return (
-       <div className="register-page">
+       <div className="relative flex min-h-[80vh] items-center justify-center p-4 sm:p-6 lg:p-8">
       {/* Toast */}
       {toast && (
-        <div className="toast">
-          <CheckCircle2 className="toast-icon" />
-          <span className="toast-text">Account created for {toast.name}</span>
+        <div className="fixed top-4 right-4 z-50 flex items-center gap-2 rounded-md border bg-background px-4 py-3 shadow-lg animate-in fade-in slide-in-from-top-2">
+          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+          <span className="text-sm font-medium">Account created for {toast.name}</span>
         </div>
       )}
  
-      <Card className="card">
-        <CardHeader className="card-header">
-          <CardTitle className="card-title">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold tracking-tight text-center">
             Create an account
           </CardTitle>
-          <CardDescription className="card-description">
+          <CardDescription className="text-center">
             Enter your details below to set up your profile
           </CardDescription>
         </CardHeader>
  
         <form onSubmit={handleSubmit}>
-          <CardContent className="card-content">
+          <CardContent className="grid gap-4">
             {error && (
-              <div className="error-banner">
+              <div className="p-3 text-sm font-medium text-destructive bg-destructive/10 rounded-md border border-destructive/20">
                 {error}
               </div>
             )}
  
-            <div className="field-group">
+            <div className="grid gap-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
                 id="name"
