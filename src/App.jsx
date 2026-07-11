@@ -6,11 +6,15 @@ import Contact from './pages/Contact';
 import AddHostel from './pages/AddHostel'
 import ManageUsers from './pages/ManageUsers'
 import ManageBookings from './pages/ManageBookings'
+import { AuthProvider } from './context/AuthContext';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
     <>
       <Router>
+        <AuthProvider>
        {/* <HomePage/> */}
       <Routes>
          
@@ -18,11 +22,14 @@ function App() {
         <Route path="/hostels/:id" element={<HostelDetails/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/addhostel" element={<AddHostel/>} />
         <Route path="/manageusers" element={<ManageUsers/>} />
         <Route path="/managebookings" element={<ManageBookings/>} />
         
       </Routes>
+      </AuthProvider>
     
       </Router>
       
