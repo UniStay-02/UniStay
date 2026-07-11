@@ -31,38 +31,21 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
  
     setIsSubmitting(true);
 
-    try {
-      const res = await fetch('/api/v1/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-         const data = await res.json();
+        try {
+      // No backend yet — using mock data for now.
+      // Swap this block for a real fetch('/api/v1/auth/register', ...) once
+      // the backend exists.
  
-      // The server decides if the account can be created — not the client.
-      if (!res.ok) {
-        throw new Error(data.message || 'Failed to create an account.');
-      }
+      await new Promise((resolve) => setTimeout(resolve, 1200));
  
-      // Expecting the backend to return something like:
-      // { token: "...", user: { id, email, name, role } }
-      const { token, user } = data;
+      const fakeToken = "jwt-access-token-example";
+      const fakeUser = { id: "u-secure-2", email: formData.email, name: formData.name, role: "user" };
  
-      // Persist the real session so a page refresh doesn't log the user out.
-      // If AuthContext already handles this internally, these two lines are
-      // redundant and safe to remove.
-      localStorage.setItem('auth_token', token);
-      localStorage.setItem('auth_user', JSON.stringify(user));
+      // register() (from AuthContext) already persists to localStorage.
+      register(fakeToken, fakeUser);
  
-      register(token, user);
- 
-      // Show a brief "Signed in as {name}" toast before redirecting.
-      setToast({ name: user.name });
+      // Show a brief "Account created" toast before redirecting.
+      setToast({ name: fakeUser.name });
       setTimeout(() => {
         navigate('/login');
       }, 1200);
