@@ -90,18 +90,7 @@ function Navbar() {
               >
                 Register
               </Link>
-              <Link
-                to="/profile"
-                className="hover:text-[#F98603] transition font-medium"
-              >
-                Hi, {user?.name || "there"}
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="border border-white px-5 py-2 rounded-lg hover:bg-white hover:text-[#0E1733] transition cursor-pointer"
-              >
-                Log out
-              </button>
+
             </>
           )}
 
