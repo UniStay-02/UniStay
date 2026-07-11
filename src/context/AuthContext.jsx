@@ -18,8 +18,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Login function
-  const login = (userData) => {
+    // Login function — called as login(token, userData) from Login.jsx.
+  // The token isn't used yet (no real backend), but the signature is kept
+  // so it's a one-line swap later when a real API returns a real token.
+  const login = (token , userData) => {
+    setUser(userData);
+  };
+
+    const register = (token, userData) => {
     setUser(userData);
   };
 
@@ -34,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         login,
+        register,
         logout,
         isAuthenticated: !!user,
       }}
