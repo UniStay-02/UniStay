@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   MapPin,
@@ -112,6 +113,7 @@ export default function HomePage() {
   const [location, setLocation] = useState("");
   const [roomType, setRoomType] = useState("");
   const [budget, setBudget] = useState("");
+  const navigate = useNavigate();
 
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -139,6 +141,7 @@ export default function HomePage() {
     };
   }, []);
 
+<<<<<<< HEAD
   const hostelsToShow =
     !loading && !error && properties.length > 0 ? properties.slice(0, 4) : FALLBACK_HOSTELS;
 
@@ -153,6 +156,18 @@ export default function HomePage() {
     const query = params.toString();
     navigate(query ? `/properties?${query}` : "/properties");
   };
+=======
+  const handleSearch = () => {
+  const params = new URLSearchParams();
+
+  if (location) params.append("location", location);
+  if (roomType) params.append("roomType", roomType);
+  if (budget) params.append("budget", budget);
+
+  navigate(`/hostels?${params.toString()}`);
+};
+  const { user } = useAuth();
+>>>>>>> main
 
   return (
     <div className="bg-white text-[#1C2130]">
@@ -361,8 +376,13 @@ export default function HomePage() {
                   </p>
 
                   <Link
+<<<<<<< HEAD
                     to={`/hostels/${hostel.id}`}
                     className="inline-flex items-center gap-2 mt-5 font-semibold group"
+=======
+                    to="/hostels"
+                    className="inline-flex items-center gap-2 mt-5 font-semibold"
+>>>>>>> main
                     style={{ color: ORANGE }}
                   >
                     View Details
@@ -459,8 +479,11 @@ export default function HomePage() {
           </p>
           <Link
             to="/hostels"
-            className="inline-flex items-center gap-2 mt-10 px-8 py-4 rounded-lg font-semibold transition-colors hover:brightness-95"
-            style={{ backgroundColor: ORANGE, color: NAVY }}
+            className="inline-flex items-center gap-2 mt-10 px-8 py-4 rounded-lg font-semibold"
+            style={{
+              backgroundColor: ORANGE,
+              color: NAVY,
+            }}
           >
             Browse Listings
             <ArrowRight size={16} />
