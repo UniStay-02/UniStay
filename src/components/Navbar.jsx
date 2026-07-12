@@ -94,12 +94,7 @@ function Navbar() {
             </>
           )}
 
-          <Link
-            to="/addhostel"
-            className="bg-[#F98603] hover:bg-orange-500 px-5 py-2 rounded-lg font-semibold transition"
-          >
-            Add hostel
-          </Link>
+  
         </div>
 
         {/* Mobile Menu Button */}

@@ -57,13 +57,7 @@ function AdminNavbar() {
  
         
          <div className="flex items-center gap-3">
-          <Link
-            to="/profile"
-            className="flex items-center gap-2 bg-[#F98603] hover:bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold transition"
-          >
-            <User size={18} />
-            Profile
-          </Link>
+ 
  
           <button
             onClick={handleLogout}
@@ -104,15 +98,7 @@ function AdminNavbar() {
               </Link>
             );
           })}
- 
-          <Link
-            to="/profile"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-3 px-6 py-4 border-b border-white/10 hover:text-[#F98603] transition"
-          >
-            <User size={18} />
-            Profile
-          </Link>
+
  
           <button
             onClick={() => {
