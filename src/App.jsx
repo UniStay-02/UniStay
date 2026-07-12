@@ -19,8 +19,8 @@ function App() {
     <>
       <Router>
         <AuthProvider>
-          {/* <HomePage/> */}
-          <Routes>
+       {/* <HomePage/> */}
+      <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/hostels/:id" element={<HostelDetails />} />
             <Route path="/hostels" element={<Hostels />} />
@@ -39,9 +39,12 @@ function App() {
             <Route path="/addhostel" element={<AddHostel />} />
             <Route path="/manageusers" element={<ManageUsers />} />
             <Route path="/managebookings" element={<ManageBookings />} />
-          </Routes>
-        </AuthProvider>
+
+      </Routes>
+      </AuthProvider>
+    
       </Router>
+      
     </>
   );
 }
