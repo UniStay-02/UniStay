@@ -23,9 +23,9 @@ function AdminNavbar() {
     navigate("/login");
   };
   return (
-    <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
+   <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
+ 
         {/* Logo */}
         <Link to="/admindash" className="flex items-center gap-2">
           <Building2 className="w-7 h-7" />
@@ -33,12 +33,12 @@ function AdminNavbar() {
             UniStay Admin
           </span>
         </Link>
-
+ 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map(({ to, label, icon: Icon }) => {
             const isActive = location.pathname === to;
-
+ 
             return (
               <Link
                 key={to}
@@ -54,8 +54,9 @@ function AdminNavbar() {
             );
           })}
         </div>
-
-        <div className="flex items-center gap-3">
+ 
+        
+         <div className="flex items-center gap-3">
           <Link
             to="/profile"
             className="flex items-center gap-2 bg-[#F98603] hover:bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold transition"
@@ -63,8 +64,56 @@ function AdminNavbar() {
             <User size={18} />
             Profile
           </Link>
-
-
+ 
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 bg-white text-[#0E1733] px-4 py-2 rounded-lg hover:bg-[#F98603] hover:text-white transition cursor-pointer"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
+        </div>
+ 
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+ 
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="lg:hidden bg-[#16234b]">
+          {navLinks.map(({ to, label, icon: Icon }) => {
+            const isActive = location.pathname === to;
+ 
+            return (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center gap-3 px-6 py-4 border-b border-white/10 transition ${
+                  isActive ? "text-[#F98603] font-semibold" : "hover:text-[#F98603]"
+                }`}
+              >
+                <Icon size={18} />
+                {label}
+              </Link>
+            );
+          })}
+ 
+          <Link
+            to="/profile"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-3 px-6 py-4 border-b border-white/10 hover:text-[#F98603] transition"
+          >
+            <User size={18} />
+            Profile
+          </Link>
+ 
           <button
             onClick={() => {
               handleLogout();
@@ -76,8 +125,7 @@ function AdminNavbar() {
             Logout
           </button>
         </div>
-      </div>
-
+      )}
     </nav>
   );
 
