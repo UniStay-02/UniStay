@@ -75,239 +75,207 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100">
-      <AdminNavbar />
+<div className="min-h-screen bg-slate-100">
+<AdminNavbar />
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+<div className="max-w-7xl mx-auto px-6 py-8">
 
-        <div className="mb-10">
-          <h1
-            className="text-4xl font-bold"
-            style={{ color: NAVY }}
-          >
-            Welcome, Admin!
-          </h1>
+<div className="mb-10">
+<h1
+className="text-4xl font-bold"
+style={{ color: NAVY }}
+>
+Welcome, Admin!
+</h1>
 
-          <p className="text-gray-500 mt-2">
-            Here's what's happening on UniStay today.
-          </p>
-        </div>
+<p className="text-gray-500 mt-2">
+Here's what's happening on UniStay today.
+</p>
+</div>
 
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{/* Statistics */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+gap-6">
 
-          {cards.map((card) => {
-            const Icon = card.icon;
+{cards.map((card) => {
+const Icon = card.icon;
 
-            return (
-              <Card
-                key={card.title}
-                className="shadow hover:shadow-lg transition"
-              >
-                <CardContent className="p-6">
+return (
+<Card
+key={card.title}
+className="shadow hover:shadow-lg transition"
+>
+<CardContent className="p-6">
 
-                  <div className="flex items-center gap-3">
-                    <div className="bg-orange-100 p-3 rounded-full">
-                      <Icon size={24} color={ORANGE} />
-                    </div>
+<div className="flex items-center gap-3">
+<div className="bg-orange-100 p-3 rounded-full">
+<Icon size={24} color={ORANGE} />
+</div>
 
-                    <p
-                      className="text-lg font-semibold"
-                      style={{ color: NAVY }}
-                    >
-                      {card.title}
-                    </p>
-                  </div>
+<p
+className="text-lg font-semibold"
+style={{ color: NAVY }}
+>
+{card.title}
+</p>
+</div>
 
-                  <h2
-                    className="text-4xl font-bold mt-6"
-                    style={{ color: NAVY }}
-                  >
-                    {card.value}
-                  </h2>
+<h2
+className="text-4xl font-bold mt-6"
+style={{ color: NAVY }}
+>
+{card.value}
+</h2>
 
-                  <Link
-                    to={card.link}
-                    className="inline-block mt-6 font-semibold hover:underline"
-                    style={{ color: ORANGE }}
-                  >
-                    View More
-                  </Link>
+<Link
+to={card.link}
+className="inline-block mt-6 font-semibold
+hover:underline"
+style={{ color: ORANGE }}
+>
+View More
+</Link>
 
-                </CardContent>
-              </Card>
-            );
-          })}
+</CardContent>
+</Card>
+);
+})}
 
-        </div>
+</div>
 
-      <div className="flex justify-between items-center mb-6">
+{/* Recent Data */}
+<div className="grid lg:grid-cols-2 gap-8 mt-10">
 
-        <h2
-          className="text-xl font-bold"
-          style={{ color: NAVY }}
-        >
-          Recent Listings
-        </h2>
+{/* Recent Listings */}
+<Card>
 
-        <Link
-          to="/addhostel"
-          className="text-sm font-semibold hover:underline"
-          style={{ color: ORANGE }}
-        >
-          View More →
-        </Link>
+<CardContent className="p-6">
 
-      </div>
+<div className="flex justify-between items-center mb-6">
+<h2
+className="text-xl font-bold"
+style={{ color: NAVY }}
+>
+Recent Listings
+</h2>
 
-      {recentHostels.length > 0 ? (
+<Link
+to="/managelistings"
+className="text-sm font-semibold hover:underline"
+style={{ color: ORANGE }}
+>
+View More
+</Link>
+</div>
 
-        <div className="space-y-4">
+{recentHostels.length > 0 ? (
+<div className="space-y-4">
 
-          {recentHostels.map((hostel) => (
+{recentHostels.map((hostel) => (
+<div
+key={hostel.id}
+className="flex justify-between items-center border-b
+pb-3"
+>
 
-            <div
-              key={hostel.id}
-              className="flex justify-between items-center border-b pb-3"
-            >
+<div>
+<h3 className="font-semibold">
+{hostel.formattedAddress}
+</h3>
 
-              <div>
+<p className="text-sm text-gray-500">
+{hostel.city}, {hostel.state}
+</p>
+</div>
 
-                <h3 className="font-semibold">
-                  {hostel.hostelName}
-                </h3>
+<span
+className="px-3 py-1 rounded-full text-sm
+bg-orange-100"
+style={{ color: ORANGE }}
+>
+{hostel.propertyType}
+</span>
 
-                <p className="text-sm text-gray-500">
-                  {hostel.university}
-                </p>
+</div>
+))}
 
-          {/* Recent Listings */}
-          <Card>
+</div>
+) : (
+<p className="text-gray-500">
+No listings available.
+</p>
+)}
 
-            <CardContent className="p-6">
+</CardContent>
 
-              <div className="flex justify-between items-center mb-6">
-                <h2
-                  className="text-xl font-bold"
-                  style={{ color: NAVY }}
-                >
-                  Recent Listings
-                </h2>
+</Card>
 
-                <Link
-                  to="/managelistings"
-                  className="text-sm font-semibold hover:underline"
-                  style={{ color: ORANGE }}
-                >
-                  View More
-                </Link>
-              </div>
+{/* Recent Bookings */}
+<Card>
 
-              {recentHostels.length > 0 ? (
-                <div className="space-y-4">
+<CardContent className="p-6">
 
-                  {recentHostels.map((hostel) => (
-                    <div
-                      key={hostel.id}
-                      className="flex justify-between items-center border-b pb-3"
-                    >
+<div className="flex justify-between items-center mb-6">
+<h2
+className="text-xl font-bold"
+style={{ color: NAVY }}
+>
+Recent Bookings
+</h2>
 
-                      <div>
-                        <h3 className="font-semibold">
-                          {hostel.formattedAddress}
-                        </h3>
+<Link
+to="/managebookings"
+className="text-sm font-semibold hover:underline"
+style={{ color: ORANGE }}
+>
+View More
+</Link>
+</div>
 
-                        <p className="text-sm text-gray-500">
-                          {hostel.city}, {hostel.state}
-                        </p>
-                      </div>
+{recentBookings.length > 0 ? (
+<div className="space-y-4">
 
-                      <span
-                        className="px-3 py-1 rounded-full text-sm bg-orange-100"
-                        style={{ color: ORANGE }}
-                      >
-                        {hostel.propertyType}
-                      </span>
+{recentBookings.map((booking) => (
+<div
+key={booking.id}
+className="flex justify-between items-center border-b
+pb-3"
+>
 
-                    </div>
-                  ))}
+<div>
+<h3 className="font-semibold">
+{booking.fullName}
+</h3>
 
-                </div>
-              ) : (
-                <p className="text-gray-500">
-                  No listings available.
-                </p>
-              )}
+<p className="text-sm text-gray-500">
+{booking.hostelName}
+</p>
+</div>
 
-            </CardContent>
+<span
+className="text-sm"
+style={{ color: NAVY }}
+>
+{booking.viewingDate}
+</span>
 
-          </Card>
+</div>
+))}
 
-          {/* Recent Bookings */}
-          <Card>
+</div>
+) : (
+<p className="text-gray-500">
+No bookings available.
+</p>
+)}
 
-            <CardContent className="p-6">
+</CardContent>
 
-              <div className="flex justify-between items-center mb-6">
-                <h2
-                  className="text-xl font-bold"
-                  style={{ color: NAVY }}
-                >
-                  Recent Bookings
-                </h2>
+</Card>
 
-                <Link
-                  to="/managebookings"
-                  className="text-sm font-semibold hover:underline"
-                  style={{ color: ORANGE }}
-                >
-                  View More
-                </Link>
-              </div>
+</div>
 
-              {recentBookings.length > 0 ? (
-                <div className="space-y-4">
-
-                  {recentBookings.map((booking) => (
-                    <div
-                      key={booking.id}
-                      className="flex justify-between items-center border-b pb-3"
-                    >
-
-                      <div>
-                        <h3 className="font-semibold">
-                          {booking.fullName}
-                        </h3>
-
-                        <p className="text-sm text-gray-500">
-                          {booking.hostelName}
-                        </p>
-                      </div>
-
-                      <span
-                        className="text-sm"
-                        style={{ color: NAVY }}
-                      >
-                        {booking.viewingDate}
-                      </span>
-
-                    </div>
-                  ))}
-
-                </div>
-              ) : (
-                <p className="text-gray-500">
-                  No bookings available.
-                </p>
-              )}
-
-            </CardContent>
-
-          </Card>
-
-        </div>
-
-      </div>
-    </div>
-  );
+</div>
+</div>
+);
 }
