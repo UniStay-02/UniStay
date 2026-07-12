@@ -21,7 +21,6 @@ import About from './pages/About';
 
 function App() {
   return (
-    <>
       <Router>
         <AuthProvider>
        {/* <HomePage/> */}
@@ -32,6 +31,9 @@ function App() {
             <Route path="/booking/:id" element={<BookingForm />} />
             <Route path="/booking/:i" element={<BookingForm />} />
             <Route path ="/about" element={<About/>}/>
+            <Route path ="/login" element={<Login/>}/>
+            <Route path ="/register" element={<Register/>}/>
+            <Route path ="/contact" element={<Contact/>}/>
 
           <Route
             path="/booking-confirmation"
