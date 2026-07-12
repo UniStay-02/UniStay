@@ -1,18 +1,18 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react"
-import { Building2, LayoutDashboard, PlusCircle, List, Users, LogOut, Menu,
-  X } from "lucide-react";
+import {
+  Building2, LayoutDashboard, PlusCircle, List, Users, LogOut, Menu,
+  X
+} from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const navLinks = [
   { to: "/admindash", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/addhostel", label: "Add Hostel", icon: PlusCircle },
   { to: "/managebookings", label: "Bookings", icon: List },
   { to: "/manageusers", label: "Users", icon: Users },
-  { to: "/managelistings", label: "Manage Listings", icon: Building2 },
 ];
 
- function AdminNavbar() {
+function AdminNavbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,98 +22,66 @@ const navLinks = [
     logout();
     navigate("/login");
   };
- return (
-  <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
-    <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  return (
+    <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-      {/* Logo */}
-      <Link to="/admindash" className="flex items-center gap-2">
-        <Building2 className="w-7 h-7" />
-        <span className="text-xl md:text-2xl font-bold">
-          UniStay Admin
-        </span>
-      </Link>
+        {/* Logo */}
+        <Link to="/admindash" className="flex items-center gap-2">
+          <Building2 className="w-7 h-7" />
+          <span className="text-xl md:text-2xl font-bold">
+            UniStay Admin
+          </span>
+        </Link>
 
-      {/* Desktop Navigation */}
-      <div className="hidden lg:flex items-center gap-8">
-        {navLinks.map(({ to, label, icon: Icon }) => {
-          const isActive = location.pathname === to;
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map(({ to, label, icon: Icon }) => {
+            const isActive = location.pathname === to;
 
-          return (
-            <Link
-              key={to}
-              to={to}
-              className={`flex items-center gap-2 pb-1 border-b-2 transition ${
-                isActive
-                  ? "text-[#F98603] border-[#F98603] font-semibold"
-                  : "border-transparent hover:text-[#F98603]"
-              }`}
-            >
-              <Icon size={18} />
-              {label}
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-2 pb-1 border-b-2 transition ${isActive
+                    ? "text-[#F98603] border-[#F98603] font-semibold"
+                    : "border-transparent hover:text-[#F98603]"
+                  }`}
+              >
+                <Icon size={18} />
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Link
+            to="/profile"
+            className="flex items-center gap-2 bg-[#F98603] hover:bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold transition"
+          >
+            <User size={18} />
+            Profile
+          </Link>
+
+
+
+
+          <button
+            onClick={() => {
+              handleLogout();
+              setMenuOpen(false);
+            }}
+            className="w-full flex items-center gap-3 px-6 py-4 text-left hover:bg-red-600 transition"
+          >
+            <LogOut size={20} />
+            Logout
+          </button>
+        </div>
       </div>
 
-      {/* Desktop Logout */}
-      <button
-        onClick={handleLogout}
-        className="hidden lg:flex items-center gap-2 bg-white text-[#0E1733] px-4 py-2 rounded-lg hover:bg-[#F98603] hover:text-white transition"
-      >
-        <LogOut size={18} />
-        Logout
-      </button>
-
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="lg:hidden"
-      >
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
-
-    </div>
-
-    {/* Mobile Menu */}
-    {menuOpen && (
-      <div className="lg:hidden bg-[#14204A] border-t border-white/10">
-
-        {navLinks.map(({ to, label, icon: Icon }) => {
-          const isActive = location.pathname === to;
-
-          return (
-            <Link
-              key={to}
-              to={to}
-              onClick={() => setMenuOpen(false)}
-              className={`flex items-center gap-3 px-6 py-4 transition ${
-                isActive
-                  ? "bg-[#F98603] text-white"
-                  : "hover:bg-[#1C2B5C]"
-              }`}
-            >
-              <Icon size={20} />
-              {label}
-            </Link>
-          );
-        })}
-
-        <button
-          onClick={() => {
-            handleLogout();
-            setMenuOpen(false);
-          }}
-          className="w-full flex items-center gap-3 px-6 py-4 text-left hover:bg-red-600 transition"
-        >
-          <LogOut size={20} />
-          Logout
-        </button>
-
-      </div>
-    )}
-  </nav>
-);
+    </nav>
+  );
 
 }
 
