@@ -10,7 +10,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
-
+import Hostels from './pages/Hostels';
 function App() {
   return (
     <>
