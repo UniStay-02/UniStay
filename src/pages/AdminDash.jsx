@@ -7,6 +7,7 @@ import {
   CalendarCheck,
   Clock,
 } from "lucide-react";
+import { Link } from "react-router-dom"
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
@@ -16,7 +17,7 @@ export default function AdminDashboard() {
     users: 0,
     hostels: 0,
     bookings: 0,
-    pending: 0,
+ 
   });
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function AdminDashboard() {
       users: users.length,
       hostels: hostels.length,
       bookings: bookings.length,
-      pending: pendingListings.length,
+    
     });
   }, []);
 
@@ -46,22 +47,21 @@ export default function AdminDashboard() {
       title: "Total Users",
       value: stats.users,
       icon: Users,
+      link: "/manageusers",
     },
     {
       title: "Total Hostels",
       value: stats.hostels,
       icon: Building2,
+      link: "/managelistings",
     },
     {
       title: "Bookings",
       value: stats.bookings,
       icon: CalendarCheck,
+       link: "/managebookings",
     },
-    {
-      title: "Pending Listings",
-      value: stats.pending,
-      icon: Clock,
-    },
+
   ];
 
   return (
@@ -94,33 +94,39 @@ export default function AdminDashboard() {
                 key={card.title}
                 className="shadow hover:shadow-lg transition"
               >
-                <CardContent className="p-6 flex justify-between items-center">
+               <CardContent className="p-6">
 
-                  <div>
+  <div className="flex items-center gap-3">
 
-                    <p className="text-gray-500 text-sm">
-                      {card.title}
-                    </p>
+    <div className="bg-orange-100 p-3 rounded-full">
+      <Icon size={24} color={ORANGE} />
+    </div>
 
-                    <h2
-                      className="text-4xl font-bold mt-2"
-                      style={{ color: NAVY }}
-                    >
-                      {card.value}
-                    </h2>
+    <p
+      className="text-lg font-semibold"
+      style={{ color: NAVY }}
+    >
+      {card.title}
+    </p>
 
-                  </div>
+  </div>
 
-                  <div className="bg-orange-100 rounded-full p-4">
+  <h2
+    className="text-4xl font-bold mt-6"
+    style={{ color: NAVY }}
+  >
+    {card.value}
+  </h2>
 
-                    <Icon
-                      size={28}
-                      color={ORANGE}
-                    />
+  <Link
+    to={card.link}
+    className="inline-block mt-6 font-semibold hover:underline"
+    style={{ color: ORANGE }}
+  >
+    View More →
+  </Link>
 
-                  </div>
-
-                </CardContent>
+</CardContent>
               </Card>
             );
 
