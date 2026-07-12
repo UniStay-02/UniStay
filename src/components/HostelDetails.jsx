@@ -318,16 +318,17 @@ export default function HostelDetails() {
                 Contact Landlord
               </button>
 
-              <button
-                onClick={handleBookViewing}
-                className="w-full mt-4 py-4 rounded-lg font-semibold"
-                style={{
-                  border: `2px solid ${NAVY}`,
-                  color: NAVY,
-                }}
-              >
-                Book Viewing
-              </button>
+              <Link to={`/booking/${id}`} className="block w-full mt-4">
+                <button
+                  className="w-full py-4 rounded-lg font-semibold"
+                  style={{
+                    border: `2px solid ${NAVY}`,
+                    color: NAVY,
+                  }}
+                >
+                  Book Viewing
+                </button>
+              </Link>
               <button
                 className="w-full mt-4 py-4 rounded-lg font-semibold"
                 style={{
