@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Hostels from './pages/Hostels';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AdminRoute } from './components/AdminRoute';
+import Checkout from "@/pages/Checkout";
 
 // import ManageListings from './pages/ManageListings';
 import AdminDash from './pages/AdminDash';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/checkout" element={<Checkout />} />
 
         {/* Booking now requires login — this was the open gap */}
         <Route
