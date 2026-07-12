@@ -1,8 +1,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react"
 import {
-  Building2, LayoutDashboard, PlusCircle, List, Users, LogOut, Menu,
-  X
+  Building2, LayoutDashboard, List, Users, LogOut, Menu,
+  X, User
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
