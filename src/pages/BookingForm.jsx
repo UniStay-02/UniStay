@@ -33,9 +33,8 @@ const BookingForm = () => {
       }),
     );
 
-    alert("Viewing booked successfully!");
-
-    navigate("/profile");
+ 
+    navigate("/booking-confirmation");
   };
 
   return (

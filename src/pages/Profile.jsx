@@ -28,6 +28,11 @@ const Profile = () => {
     if (savedProfile) {
       setStudent(JSON.parse(savedProfile));
     }
+    const savedBooking = localStorage.getItem("bookedHostel");
+
+    if (savedBooking) {
+      setHostel(JSON.parse(savedBooking));
+    }
     const savedHostel = localStorage.getItem("bookedHostel");
 
     if (savedHostel) {
