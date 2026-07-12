@@ -8,11 +8,19 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
+  if (theme === "dark") {
+    document.body.style.backgroundColor = "#111827"; // dark slate
+    document.body.style.color = "#F9FAFB";           // light text
+  } else {
+    document.body.style.backgroundColor = "#FFFFFF";
+    document.body.style.color = "#111827";
+  }
 
-    localStorage.setItem("unistay-theme", theme);
-  }, [theme]);
+  document.documentElement.classList.remove("light", "dark");
+  document.documentElement.classList.add(theme);
+
+  localStorage.setItem("unistay-theme", theme);
+}, [theme]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
