@@ -380,7 +380,7 @@ export default function HomePage() {
                   </p>
 
                   <Link
-                    to="/properties"
+                    to="/hostels"
                     className="inline-flex items-center gap-2 mt-5 font-semibold"
                     style={{ color: ORANGE }}
                   >
@@ -535,7 +535,7 @@ export default function HomePage() {
           </p>
 
           <Link
-            to="/properties"
+            to="/hostels"
             className="inline-flex items-center gap-2 mt-10 px-8 py-4 rounded-lg font-semibold"
             style={{
               backgroundColor: ORANGE,
