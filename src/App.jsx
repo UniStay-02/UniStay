@@ -39,6 +39,7 @@ function App() {
             <Route path="/addhostel" element={<AddHostel />} />
             <Route path="/manageusers" element={<ManageUsers />} />
             <Route path="/managebookings" element={<ManageBookings />} />
+            <Route path="/admindash" element={<AdminDash />} />
           </Routes>
         </AuthProvider>
       </Router>
