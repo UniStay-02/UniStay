@@ -9,10 +9,8 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ProtectedRoute from './components/ProtectedRoute';
-import DisplayHostels from './pages/DisplayHostels'
-import ManageListings from './pages/ManageListings';
-import AdminDash from './pages/AdminDash';
+import Hostels from './pages/Hostels';
+
 
 function App() {
   return (
