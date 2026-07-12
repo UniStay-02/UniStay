@@ -159,7 +159,7 @@ setRecentBookings(bookings.slice(-5).reverse());
           className="text-sm font-semibold hover:underline"
           style={{ color: ORANGE }}
         >
-          View More →
+          View More 
         </Link>
 
       </div>
