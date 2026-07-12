@@ -11,49 +11,42 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Hostels from './pages/Hostels';
 import ProtectedRoute from './components/ProtectedRoute';
+import { AdminRoute } from './components/AdminRoute';
 
 // import ManageListings from './pages/ManageListings';
-// import AdminDash from './pages/AdminDash';
+import AdminDash from './pages/AdminDash';
 import BookingForm from './pages/BookingForm';
 import BookingConfirmation from './pages/BookingConfirmation';
-import AdminDashboard from './pages/AdminDash';
-import ManageListings from './pages/ManageListings';
-
+import About from './pages/About';
 
 function App() {
   return (
-    <>
-      <Router>
-        <AuthProvider>
-       {/* <HomePage/> */}
-      <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/hostels/:id" element={<HostelDetails />} />
-            <Route path="/hostels" element={<Hostels />} />
-            <Route path="/booking/:id" element={<BookingForm />} />
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/hostels/:id" element={<HostelDetails />} />
+          <Route path="/hostels" element={<Hostels />} />
+          <Route path="/booking/:id" element={<BookingForm />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+             
 
-            <Route element={<ProtectedRoute />}>
-              <Route
-                path="/booking-confirmation"
-                element={<BookingConfirmation />}
-              />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/addhostel" element={<AddHostel />} />
-            <Route path="/manageusers" element={<ManageUsers />} />
-            <Route path="/managebookings" element={<ManageBookings />} />
-            <Route path="/managelistings" element={<ManageListings />} />
-            <Route path="/admindash" element={<AdminDashboard />} />
+            <Route path ="/about" element={<About/>}/> 
+          <Route
+            path="/booking-confirmation"
+            element={<ProtectedRoute><BookingConfirmation /></ProtectedRoute>}
+          />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-      </Routes>
+          <Route path="/admindash" element={<AdminRoute><AdminDash /></AdminRoute>} />
+          <Route path="/addhostel" element={<AdminRoute><AddHostel /></AdminRoute>} />
+          <Route path="/manageusers" element={<AdminRoute><ManageUsers /></AdminRoute>} />
+          <Route path="/managebookings" element={<AdminRoute><ManageBookings /></AdminRoute>} />
+        </Routes>
       </AuthProvider>
-    
-      </Router>
-      
-    </>
+    </Router>
   );
 }
 

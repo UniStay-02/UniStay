@@ -116,6 +116,52 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
 }
+.dark body {
+    background: #111827;
+    color: #f9fafb;
+}
+
+.dark .bg-white {
+    background: #1f2937 !important;
+}
+
+.dark .bg-gray-50 {
+    background: #111827 !important;
+}
+
+.dark .bg-gray-100 {
+    background: #1f2937 !important;
+}
+
+.dark .text-black,
+.dark .text-gray-900 {
+    color: #f9fafb !important;
+}
+
+.dark .text-gray-800 {
+    color: #e5e7eb !important;
+}
+
+.dark .text-gray-700 {
+    color: #d1d5db !important;
+}
+
+.dark .text-gray-600,
+.dark .text-gray-500 {
+    color: #9ca3af !important;
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+    background: #1f2937 !important;
+    color: #fff !important;
+    border-color: #374151 !important;
+}
+
+.dark button {
+    transition: all 0.3s ease;
+}
 
 @layer base {
   * {

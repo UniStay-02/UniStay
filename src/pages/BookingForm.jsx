@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const BookingForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { user } = useAuth();
 
   const [booking, setBooking] = useState({
-    fullName: "",
-    email: "",
+    fullName: user?.name || "",
+    email: user?.email || "",
     phone: "",
     viewingDate: "",
     viewingTime: "",
@@ -24,58 +26,18 @@ const BookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   const handleSubmit = (e) => {
-  e.preventDefault();
+    // Scoped to the logged-in user so Profile can look this up reliably —
+    // ProtectedRoute guarantees `user` exists by the time this form is reachable.
+    localStorage.setItem(
+      `bookedHostel_${user.email}`,
+      JSON.stringify({
+        hostelId: id,
+        ...booking,
+        status: "Viewing Booked",
+        createdAt: new Date().toISOString(),
+      }),
+    );
 
-  const bookings =
-    JSON.parse(localStorage.getItem("bookings")) || [];
-
-  const newBooking = {
-    id: Date.now(),
-    hostelId: id,
-
-    // Save hostel information
-    hostelName: hostel.formattedAddress,
-    city: hostel.city,
-    state: hostel.state,
-
-    fullName: booking.fullName,
-    email: booking.email,
-    phone: booking.phone,
-    viewingDate: booking.viewingDate,
-    viewingTime: booking.viewingTime,
-    notes: booking.notes,
-    status: "Pending",
-  };
-
-  bookings.push(newBooking);
-
-  localStorage.setItem(
-    "bookings",
-    JSON.stringify(bookings)
-  );
-
-  navigate("/booking-confirmation");
-};
-
-const existingBookings =
-  JSON.parse(localStorage.getItem("bookings")) || [];
-
-existingBookings.push(newBooking);
-
-localStorage.setItem(
-  "bookings",
-  JSON.stringify(existingBookings)
-);
-
-// Optional: keep the latest booking for the confirmation page
-localStorage.setItem(
-  "bookedHostel",
-  JSON.stringify(newBooking)
-);
-    
-
- 
     navigate("/booking-confirmation");
   };
 

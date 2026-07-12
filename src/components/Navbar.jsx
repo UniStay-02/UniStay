@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-
+import { useTheme } from "@/context/ThemeContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,45 +19,41 @@ function Navbar() {
   return (
     <nav className="bg-[#0E1733] text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
         {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl font-extrabold tracking-wide"
-        >
+        <Link to="/" className="text-2xl font-extrabold tracking-wide">
           Uni<span className="text-[#F98603]">Stay</span>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link
-            to="/"
-            className="hover:text-[#F98603] transition"
-          >
+          <Link to="/" className="hover:text-[#F98603] transition">
             Home
           </Link>
 
-          <Link
-            to="/hostels"
-            className="hover:text-[#F98603] transition"
-          >
+          <Link to="/hostels" className="hover:text-[#F98603] transition">
             Hostels
           </Link>
 
-          <Link
-            to="/about"
-            className="hover:text-[#F98603] transition"
-          >
+          <Link to="/about" className="hover:text-[#F98603] transition">
             About
           </Link>
 
-          <Link
-            to="/contact"
-            className="hover:text-[#F98603] transition"
-          >
+          <Link to="/contact" className="hover:text-[#F98603] transition">
             Contact
           </Link>
         </div>
+
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full transition hover:scale-105"
+          style={{
+            backgroundColor: isDark ? "#F98603" : "#1E2A55",
+            color: isDark ? "#0E1733" : "#fff",
+          }}
+          aria-label="Toggle theme"
+        >
+          {isDark ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
 
         {/* Buttons */}
         <div className="hidden md:flex items-center gap-4">
@@ -90,16 +87,10 @@ function Navbar() {
               >
                 Register
               </Link>
-
             </>
           )}
 
-          <Link
-            to="/addhostel"
-            className="bg-[#F98603] hover:bg-orange-500 px-5 py-2 rounded-lg font-semibold transition"
-          >
-            Add hostel
-          </Link>
+  
         </div>
 
         {/* Mobile Menu Button */}
@@ -155,6 +146,14 @@ function Navbar() {
             Add Hostel
           </Link>
 
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-2 hover:text-[#F98603]"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? "Light Mode" : "Dark Mode"}
+          </button>
+
           <hr className="border-gray-600" />
 
           {isAuthenticated ? (
@@ -172,7 +171,6 @@ function Navbar() {
               >
                 Log out
               </button>
-
             </>
           ) : (
             <>

@@ -64,7 +64,7 @@ export default function AdminDashboard() {
       title: "Total Hostels",
       value: stats.hostels,
       icon: Building2,
-      link: "/managelistings",
+      link: "/addhostel",
     },
     {
       title: "Bookings",
@@ -141,8 +141,45 @@ export default function AdminDashboard() {
 
         </div>
 
-        {/* Recent Data */}
-        <div className="grid lg:grid-cols-2 gap-8 mt-10">
+      <div className="flex justify-between items-center mb-6">
+
+        <h2
+          className="text-xl font-bold"
+          style={{ color: NAVY }}
+        >
+          Recent Listings
+        </h2>
+
+        <Link
+          to="/addhostel"
+          className="text-sm font-semibold hover:underline"
+          style={{ color: ORANGE }}
+        >
+          View More →
+        </Link>
+
+      </div>
+
+      {recentHostels.length > 0 ? (
+
+        <div className="space-y-4">
+
+          {recentHostels.map((hostel) => (
+
+            <div
+              key={hostel.id}
+              className="flex justify-between items-center border-b pb-3"
+            >
+
+              <div>
+
+                <h3 className="font-semibold">
+                  {hostel.hostelName}
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  {hostel.university}
+                </p>
 
           {/* Recent Listings */}
           <Card>
