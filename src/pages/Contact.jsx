@@ -10,6 +10,29 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+// Get this from formspree.io after creating a form — looks like
+// "https://formspree.io/f/xyzabcde"
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+// Key your admin dashboard should read from to list contact messages
+const MESSAGES_STORAGE_KEY = "unistay-messages";
+
+function saveMessageToAdmin(entry) {
+  const existing = JSON.parse(localStorage.getItem(MESSAGES_STORAGE_KEY)) || [];
+
+  const record = {
+    id: Date.now().toString(),
+    ...entry,
+    read: false,
+    createdAt: new Date().toISOString(),
+  };
+
+  localStorage.setItem(
+    MESSAGES_STORAGE_KEY,
+    JSON.stringify([record, ...existing])
+  );
+}
+
 const SUBJECT_OPTIONS = [
   { value: "", label: "Select a subject..." },
   { value: "booking", label: "Booking a Hostel" },
@@ -51,20 +74,50 @@ const Contact = () => {
 
     setStatus("sending");
 
+    const subjectLabel =
+      formData.subject === "other"
+        ? formData.customSubject
+        : SUBJECT_OPTIONS.find((opt) => opt.value === formData.subject)?.label || "General";
+
+    // Always save to the admin portal first — this is the source of truth
     try {
-      // TODO: replace with your real endpoint, e.g.
-      // await fetch("/api/contact", { method: "POST", body: JSON.stringify(formData) });
-      await new Promise((resolve) => setTimeout(resolve, 900));
-
-      setStatus("sent");
-      setFormData({ name: "", email: "", subject: "", customSubject: "", message: "" });
-
-      // Reset the success banner after a few seconds
-      setTimeout(() => setStatus("idle"), 5000);
+      saveMessageToAdmin({
+        name: formData.name,
+        email: formData.email,
+        subject: subjectLabel,
+        message: formData.message,
+      });
     } catch (err) {
-      console.error(err);
+      console.error("Failed to save message locally:", err);
       setStatus("error");
+      return;
     }
+
+    // Formspree is a secondary email notification — don't block success on it
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: subjectLabel,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        console.warn("Formspree notification failed, message still saved to admin portal.");
+      }
+    } catch (err) {
+      console.warn("Formspree notification failed, message still saved to admin portal.", err);
+    }
+
+    setStatus("sent");
+    setFormData({ name: "", email: "", subject: "", customSubject: "", message: "" });
+
+    // Reset the success banner after a few seconds
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
