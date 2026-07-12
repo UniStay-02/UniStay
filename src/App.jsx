@@ -19,18 +19,25 @@ function App() {
         <AuthProvider>
        {/* <HomePage/> */}
       <Routes>
-         
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/hostels/:id" element={<HostelDetails/>} />
-        <Route path="/hostels" element={<Hostels/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/addhostel" element={<AddHostel/>} />
-        <Route path="/manageusers" element={<ManageUsers/>} />
-        <Route path="/managebookings" element={<ManageBookings/>} />
-        
+            <Route path="/" element={<HomePage />} />
+            <Route path="/hostels/:id" element={<HostelDetails />} />
+            <Route path="/hostels" element={<Hostels />} />
+            <Route path="/booking/:id" element={<BookingForm />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path="/booking-confirmation"
+                element={<BookingConfirmation />}
+              />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/addhostel" element={<AddHostel />} />
+            <Route path="/manageusers" element={<ManageUsers />} />
+            <Route path="/managebookings" element={<ManageBookings />} />
+
       </Routes>
       </AuthProvider>
     

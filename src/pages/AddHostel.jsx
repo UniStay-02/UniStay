@@ -52,12 +52,39 @@ email: ""
   };
 
   const handleCoverImage = (e) => {
-    handleChange("coverImage", e.target.files[0]);
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onloadend = () => {
+    handleChange("coverImage", reader.result);
   };
 
-  const handleGalleryImages = (e) => {
-    handleChange("galleryImages", Array.from(e.target.files));
-  };
+  reader.readAsDataURL(file);
+};
+
+ const handleGalleryImages = (e) => {
+  const files = Array.from(e.target.files);
+
+  Promise.all(
+    files.map(
+      (file) =>
+        new Promise((resolve) => {
+          const reader = new FileReader();
+
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+
+          reader.readAsDataURL(file);
+        })
+    )
+  ).then((images) => {
+    handleChange("galleryImages", images);
+  });
+};
 
   const toggleAmenity = (amenity) => {
   setHostelData((prev) => ({
@@ -67,10 +94,57 @@ email: ""
       : [...prev.amenities, amenity],
   }));
 };
+const publishHostel = () => {
+  // Get existing hostels
+  const existingHostels =
+    JSON.parse(localStorage.getItem("hostels")) || [];
 
+  // Create a new hostel object
+  const newHostel = {
+    id: Date.now(),
+    ...hostelData,
+    createdAt: new Date().toISOString(),
+    status: "Available",
+  };
+
+  // Save to localStorage
+  existingHostels.push(newHostel);
+
+  localStorage.setItem(
+    "hostels",
+    JSON.stringify(existingHostels)
+  );
+
+  alert("Hostel Published Successfully!");
+
+  console.log(existingHostels);
+
+  // Optional: Reset form
+  setHostelData({
+    hostelName: "",
+    description: "",
+    university: "",
+    hostelType: "",
+    roomType: "",
+    amenities: [],
+    coverImage: null,
+    galleryImages: [],
+    county: "",
+    area: "",
+    mapLink: "",
+    rent: "",
+    deposit: "",
+    bookingFee: "",
+    ownerName: "",
+    phone: "",
+    email: "",
+  });
+
+  setStep(1);
+};
   return (
     <div>
-      <AdminNavbar/>
+     
     <div className="min-h-screen mt-4 bg-slate-100 p-8">
       
       <div className="max-w-4xl mx-auto">
@@ -300,7 +374,7 @@ email: ""
                 key={index}
                 className="text-sm text-gray-600"
               >
-                📷 {image.name}
+                {image.name}
               </p>
             ))}
           </div>
@@ -540,14 +614,11 @@ email: ""
       </div>
 
       <Button
-        className="w-full bg-green-600 hover:bg-green-700"
-        onClick={() => {
-          console.log(hostelData);
-          alert("Hostel Published Successfully!");
-        }}
-      >
-        Publish Hostel
-      </Button>
+  className="w-full bg-green-600 hover:bg-green-700"
+  onClick={publishHostel}
+>
+  Publish Hostel
+</Button>
 
     </CardContent>
 

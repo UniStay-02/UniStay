@@ -7,8 +7,13 @@ import { Eye, EyeOff, Loader2, CheckCircle2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 
+
+// Mock admin check — no backend yet, so this is how the demo decides who's
+// an admin. Swap for a real role check (Firestore/DB field) once one exists.
+const ADMIN_EMAIL = 'admin@unistay.com';
+
 function Login() {
-const { login } = useAuth();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,6 +44,7 @@ const { login } = useAuth();
       if (formData.password.length < 4) {
         throw new Error('Password must be at least 4 characters.');
       }
+      const isAdmin = formData.email.toLowerCase() === ADMIN_EMAIL;
  
       // Extract name dynamically from the typed email (e.g., "alex.dev@gmail.com" -> "Alex Dev")
       const emailPrefix = formData.email.split('@')[0];
@@ -49,24 +55,20 @@ const { login } = useAuth();
  
       const fakeToken = "jwt-access-token-example";
       const fakeUser = {
-        id: "u-secure-1",
+        id: isAdmin ? "u-admin-1" : "u-secure-1",
         email: formData.email,
-        name: dynamicName || "User", // Fallback if formatting goes sideways
-        role: "user"
+        name: isAdmin ? "Admin" : (dynamicName || "User"),
+        role: isAdmin ? "admin" : "user",
       };
  
-      // Persist the fake session so a page refresh doesn't log the user out.
-      // If AuthContext already handles this internally, these two lines are
-      // redundant and safe to remove.
-      localStorage.setItem('auth_token', fakeToken);
-      localStorage.setItem('auth_user', JSON.stringify(fakeUser));
+      
  
       login(fakeToken, fakeUser);
  
       // Show a brief "Signed in as {name}" toast before redirecting.
       setToast({ name: fakeUser.name });
       setTimeout(() => {
-        navigate('/');
+       navigate(isAdmin ? '/admindash' : '/');
       }, 1200);
     } catch (err) {
       setError(err.message || 'Invalid email or password. Please try again.');

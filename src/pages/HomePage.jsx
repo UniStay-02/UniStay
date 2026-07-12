@@ -83,6 +83,7 @@ export default function HomePage() {
   const handleSearch = () => {
     window.location.href = `/properties?location=${location}&roomType=${roomType}&budget=${budget}`;
   };
+  const { user } = useAuth();
 
   return (
     <div className="bg-white text-[#1C2130]">
@@ -124,7 +125,7 @@ export default function HomePage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              to="/hostels"
+              to="/displayhostels"
               className="flex items-center gap-2 px-7 py-3 rounded-md font-semibold"
               style={{ backgroundColor: ORANGE, color: NAVY }}
             >
@@ -132,12 +133,12 @@ export default function HomePage() {
               <ArrowRight size={16} />
             </Link>
 
-            <Link
-              to="/register"
-              className="px-7 py-3 rounded-md border border-white/30 text-white font-semibold"
-            >
-              List Property
-            </Link>
+           <Link
+  to={user ? "/addhostel" : "/register"}
+  className="px-7 py-3 rounded-md border border-white/30 text-white font-semibold"
+>
+  List Property
+</Link>
           </div>
         </div>
       </section>
@@ -395,7 +396,7 @@ export default function HomePage() {
 
           <div className="text-center mt-14">
             <Link
-              to="/properties"
+              to="/displayhostels"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg text-white font-semibold"
               style={{ backgroundColor: NAVY }}
             >
