@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // import AdminDash from './pages/AdminDash';
 import BookingForm from './pages/BookingForm';
 import BookingConfirmation from './pages/BookingConfirmation';
-
+import About from './pages/About';
 
 function App() {
   return (
@@ -29,6 +29,8 @@ function App() {
             <Route path="/hostels/:id" element={<HostelDetails />} />
             <Route path="/hostels" element={<Hostels />} />
             <Route path="/booking/:id" element={<BookingForm />} />
+            <Route path="/booking/:i" element={<BookingForm />} />
+            <Route path ="/about" element={<About/>}/>
 
             <Route element={<ProtectedRoute />}>
               <Route
