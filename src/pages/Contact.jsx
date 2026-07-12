@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import {
   Mail,
   Phone,
@@ -9,12 +10,13 @@ import {
 const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+        <Navbar/>
 
       {/* Hero */}
       <section className="bg-[#0E1733] text-white py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold">
-            Contact <span className="text-[#F98603]">UniStay</span>
+            Contact    
           </h1>
 
           <p className="mt-5 text-lg text-gray-300 max-w-2xl mx-auto">
