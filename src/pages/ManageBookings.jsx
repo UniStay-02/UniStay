@@ -2,208 +2,209 @@ import { useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
+Card,
+CardHeader,
+CardTitle,
+CardContent,
 } from "@/components/ui/card";
 
 export default function ManageBookings() {
-  const [bookings, setBookings] = useState([]);
+const [bookings, setBookings] = useState([]);
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
+useEffect(() => {
+fetchBookings();
+}, []);
 
-  const fetchBookings = () => {
-    const data =
-      JSON.parse(localStorage.getItem("bookings")) || [];
+const fetchBookings = () => {
+const data =
+JSON.parse(localStorage.getItem("bookings")) || [];
 
-    setBookings(data);
-  };
+setBookings(data);
+};
 
-  const updateStatus = (id, status) => {
-    const updated = bookings.map((booking) =>
-      booking.id === id
-        ? { ...booking, status }
-        : booking
-    );
+const updateStatus = (id, status) => {
+const updated = bookings.map((booking) =>
+booking.id === id
+? { ...booking, status }
+: booking
+);
 
-    setBookings(updated);
-    localStorage.setItem(
-      "bookings",
-      JSON.stringify(updated)
-    );
-  };
+setBookings(updated);
+localStorage.setItem(
+"bookings",
+JSON.stringify(updated)
+);
+};
 
-  const deleteBooking = (id) => {
-    if (!window.confirm("Delete this booking?")) return;
+const deleteBooking = (id) => {
+if (!window.confirm("Delete this booking?")) return;
 
-    const updated = bookings.filter(
-      (booking) => booking.id !== id
-    );
+const updated = bookings.filter(
+(booking) => booking.id !== id
+);
 
-    setBookings(updated);
+setBookings(updated);
 
-    localStorage.setItem(
-      "bookings",
-      JSON.stringify(updated)
-    );
-  };
+localStorage.setItem(
+"bookings",
+JSON.stringify(updated)
+);
+};
 
-  return (
-    <div className="min-h-screen bg-slate-100">
-      <AdminNavbar />
+return (
+<div className="min-h-screen bg-slate-100">
+<AdminNavbar />
 
-      <div className="max-w-7xl mx-auto p-8">
+<div className="max-w-7xl mx-auto p-8">
 
-        <Card>
+<Card>
 
-          <CardHeader>
-            <CardTitle>
-              Manage Bookings
-            </CardTitle>
-          </CardHeader>
+<CardHeader>
+<CardTitle>
+Manage Bookings
+</CardTitle>
+</CardHeader>
 
-          <CardContent className="overflow-x-auto">
+<CardContent className="overflow-x-auto">
 
-            <table className="w-full">
+<table className="w-full">
 
-              <thead className="bg-[#F98603] text-white">
+<thead className="bg-[#F98603] text-white">
 
-                <tr>
-                  <th className="p-3 text-left">Name</th>
-                  <th className="p-3 text-left">Email</th>
-                  <th className="p-3 text-left">Phone</th>
-                  <th className="p-3 text-left">Date</th>
-                  <th className="p-3 text-left">Time</th>
-                  <th className="p-3 text-left">Status</th>
-                  <th className="p-3 text-center">
-                    Actions
-                  </th>
-                </tr>
+<tr>
+<th className="p-3 text-left">Name</th>
+<th className="p-3 text-left">Email</th>
+<th className="p-3 text-left">Phone</th>
+<th className="p-3 text-left">Date</th>
+<th className="p-3 text-left">Time</th>
+<th className="p-3 text-left">Status</th>
+<th className="p-3 text-center">
+Actions
+</th>
+</tr>
 
-              </thead>
+</thead>
 
-              <tbody>
+<tbody>
 
-                {bookings.length === 0 ? (
+{bookings.length === 0 ? (
 
-                  <tr>
+<tr>
 
-                    <td
-                      colSpan="7"
-                      className="text-center py-8 text-gray-500"
-                    >
-                      No bookings found.
-                    </td>
+<td
+colSpan="7"
+className="text-center py-8 text-gray-500"
+>
+No bookings found.
+</td>
 
-                  </tr>
+</tr>
 
-                ) : (
+) : (
 
-                  bookings.map((booking) => (
+bookings.map((booking) => (
 
-                    <tr
-                      key={booking.id}
-                      className="border-b hover:bg-gray-50"
-                    >
+<tr
+key={booking.id}
+className="border-b hover:bg-gray-50"
+>
 
-                      <td className="p-3">
-                        {booking.fullName}
-                      </td>
+<td className="p-3">
+{booking.fullName}
+</td>
 
-                      <td className="p-3">
-                        {booking.email}
-                      </td>
+<td className="p-3">
+{booking.email}
+</td>
 
-                      <td className="p-3">
-                        {booking.phone}
-                      </td>
+<td className="p-3">
+{booking.phone}
+</td>
 
-                      <td className="p-3">
-                        {booking.viewingDate}
-                      </td>
+<td className="p-3">
+{booking.viewingDate}
+</td>
 
-                      <td className="p-3">
-                        {booking.viewingTime}
-                      </td>
+<td className="p-3">
+{booking.viewingTime}
+</td>
 
-                      <td className="p-3">
+<td className="p-3">
 
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            booking.status === "Approved"
-                              ? "bg-green-100 text-green-700"
-                              : booking.status === "Rejected"
-                              ? "bg-red-100 text-red-700"
-                              : "bg-yellow-100 text-yellow-700"
-                          }`}
-                        >
-                          {booking.status}
-                        </span>
+<span
+className={`px-3 py-1 rounded-full text-sm
+font-medium ${
+booking.status === "Approved"
+? "bg-green-100 text-green-700"
+: booking.status === "Rejected"
+? "bg-red-100 text-red-700"
+: "bg-yellow-100 text-yellow-700"
+}`}
+>
+{booking.status}
+</span>
 
-                      </td>
+</td>
 
-                      <td className="p-3">
+<td className="p-3">
 
-                        <div className="flex gap-2 justify-center">
+<div className="flex gap-2 justify-center">
 
-                          <Button
-                            size="sm"
-                            onClick={() =>
-                              updateStatus(
-                                booking.id,
-                                "Approved"
-                              )
-                            }
-                          >
-                            Approve
-                          </Button>
+<Button
+size="sm"
+onClick={() =>
+updateStatus(
+booking.id,
+"Approved"
+)
+}
+>
+Approve
+</Button>
 
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() =>
-                              updateStatus(
-                                booking.id,
-                                "Rejected"
-                              )
-                            }
-                          >
-                            Reject
-                          </Button>
+<Button
+size="sm"
+variant="outline"
+onClick={() =>
+updateStatus(
+booking.id,
+"Rejected"
+)
+}
+>
+Reject
+</Button>
 
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() =>
-                              deleteBooking(booking.id)
-                            }
-                          >
-                            Delete
-                          </Button>
+<Button
+size="sm"
+variant="destructive"
+onClick={() =>
+deleteBooking(booking.id)
+}
+>
+Delete
+</Button>
 
-                        </div>
+</div>
 
-                      </td>
+</td>
 
-                    </tr>
+</tr>
 
-                  ))
+))
 
-                )}
+)}
 
-              </tbody>
+</tbody>
 
-            </table>
+</table>
 
-          </CardContent>
+</CardContent>
 
-        </Card>
+</Card>
 
-      </div>
+</div>
 
-    </div>
-  );
+</div>
+);
 }
