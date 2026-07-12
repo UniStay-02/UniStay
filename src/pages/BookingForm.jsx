@@ -24,14 +24,56 @@ const BookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    localStorage.setItem(
-      "bookedHostel",
-      JSON.stringify({
-        hostelId: id,
-        ...booking,
-        status: "Viewing Booked",
-      }),
-    );
+   const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const bookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+  const newBooking = {
+    id: Date.now(),
+    hostelId: id,
+
+    // Save hostel information
+    hostelName: hostel.formattedAddress,
+    city: hostel.city,
+    state: hostel.state,
+
+    fullName: booking.fullName,
+    email: booking.email,
+    phone: booking.phone,
+    viewingDate: booking.viewingDate,
+    viewingTime: booking.viewingTime,
+    notes: booking.notes,
+    status: "Pending",
+  };
+
+  bookings.push(newBooking);
+
+  localStorage.setItem(
+    "bookings",
+    JSON.stringify(bookings)
+  );
+
+  navigate("/booking-confirmation");
+};
+
+const existingBookings =
+  JSON.parse(localStorage.getItem("bookings")) || [];
+
+existingBookings.push(newBooking);
+
+localStorage.setItem(
+  "bookings",
+  JSON.stringify(existingBookings)
+);
+
+// Optional: keep the latest booking for the confirmation page
+localStorage.setItem(
+  "bookedHostel",
+  JSON.stringify(newBooking)
+);
+    
 
  
     navigate("/booking-confirmation");
