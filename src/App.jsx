@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // import AdminDash from './pages/AdminDash';
 import BookingForm from './pages/BookingForm';
 import BookingConfirmation from './pages/BookingConfirmation';
+import AdminDashboard from './pages/AdminDash';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/addhostel" element={<AddHostel />} />
             <Route path="/manageusers" element={<ManageUsers />} />
             <Route path="/managebookings" element={<ManageBookings />} />
+            <Route path="/admindash" element={<AdminDashboard />} />
 
       </Routes>
       </AuthProvider>
