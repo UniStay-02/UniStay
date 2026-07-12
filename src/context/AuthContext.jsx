@@ -1,146 +1,57 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 
-// 1. Define the initial state and an initializer function for lazy loading
-const initialState = {
-  user: null,
-};
-
-const initializer = (initial) => {
-  try {
-    const storedUser = localStorage.getItem('auth_user');
-    const storedToken = localStorage.getItem('auth_token');
-
-    if (storedUser && storedToken) {
-      return { user: JSON.parse(storedUser) };
-    }
-  } catch (error) {
-    console.error("Failed to parse initialized auth session:", error);
-    localStorage.removeItem('auth_user');
-    localStorage.removeItem('auth_token');
-  }
-  return initial;
-};
-
-// 2. Define the reducer function
-const authReducer = (state, action) => {
-  switch (action.type) {
-    case 'LOGIN':
-    case 'REGISTER':
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case 'LOGOUT':
-      return {
-        ...state,
-        user: null,
-      };
-    default:
-      return state;
-  }
-};
-
-const AuthContext = createContext(undefined);
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // 3. Initialize useReducer with the initializer function
-  const [state, dispatch] = useReducer(authReducer, initialState, initializer);
+  // Get logged-in user from localStorage
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("unistayUser");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  // Helper selectors
-  const isAuthenticated = !!state.user;
-  const isAdmin = state.user?.role === 'admin';
+  // Save user whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("unistayUser", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("unistayUser");
+    }
+  }, [user]);
 
-  // Handle Login
-  const login = (token, userData) => {
-    localStorage.setItem('auth_token', token);
-    localStorage.setItem('auth_user', JSON.stringify(userData));
-    dispatch({ type: 'LOGIN', payload: userData });
+    // Login function — called as login(token, userData) from Login.jsx.
+  // The token isn't used yet (no real backend), but the signature is kept
+  // so it's a one-line swap later when a real API returns a real token.
+  const login = (token , userData) => {
+    setUser(userData);
   };
 
-  // Handle Registration
-  const register = (token, userData) => {
-    localStorage.setItem('auth_token', token);
-    localStorage.setItem('auth_user', JSON.stringify(userData));
-    dispatch({ type: 'REGISTER', payload: userData });
+    const register = (token, userData) => {
+    setUser(userData);
   };
 
-  // Handle Logout
+  // Logout function
   const logout = () => {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_user');
-    dispatch({ type: 'LOGOUT' });
+    setUser(null);
+    localStorage.removeItem("unistayUser");
   };
 
   return (
-    <AuthContext.Provider value={{ user: state.user, isAdmin, isAuthenticated, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        register,
+        logout,
+        isAuthenticated: !!user,
+        isAdmin: user?.role === "admin",
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
+// Custom hook
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+  return useContext(AuthContext);
 };
-
-// import { createContext, useContext, useState } from 'react';
-
-// const AuthContext = createContext(undefined);
-
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(() => {
-//     try {
-//       const storedUser = localStorage.getItem('auth_user');
-//       const storedToken = localStorage.getItem('auth_token');
-      
-//       if (storedUser && storedToken) {
-//         return JSON.parse(storedUser);
-//       }
-//     } catch (error) {
-//       console.error("Failed to parse initialized auth session:", error);
-//       localStorage.removeItem('auth_user');
-//       localStorage.removeItem('auth_token');
-//     }
-//     return null;
-//   });
-
-//   const isAuthenticated = !!user;
-
-//   // Handle Login
-//   const login = (token, userData) => {
-//     localStorage.setItem('auth_token', token);
-//     localStorage.setItem('auth_user', JSON.stringify(userData));
-//     setUser();
-//   };
-
-//   // Handle Registration
-//   const register = (token, userData) => {
-//     localStorage.setItem('auth_token', token);
-//     localStorage.setItem('auth_user', JSON.stringify(userData));
-//     setUser(userData);
-//   };
-
-//   // Handle Logout
-//   const logout = () => {
-//     localStorage.removeItem('auth_token');
-//     localStorage.removeItem('auth_user');
-//     setUser(null);
-//   };
-
-//   return (
-//     <AuthContext.Provider value={{ user, isAuthenticated, login, register, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => {
-//   const context = useContext(AuthContext);
-//   if (context === undefined) {
-//     throw new Error('useAuth must be used within an AuthProvider');
-//   }
-//   return context;
-// };
