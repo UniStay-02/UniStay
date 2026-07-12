@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }) => {
         register,
         logout,
         isAuthenticated: !!user,
+        isAdmin: user?.role === "admin",
       }}
     >
       {children}
