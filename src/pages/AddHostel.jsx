@@ -70,7 +70,7 @@ email: ""
 
   return (
     <div>
-      <AdminNavbar/>
+     
     <div className="min-h-screen mt-4 bg-slate-100 p-8">
       
       <div className="max-w-4xl mx-auto">
