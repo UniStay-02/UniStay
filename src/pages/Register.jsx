@@ -68,7 +68,7 @@ register(fakeToken, fakeUser);
       // Show a brief "Account created" toast before redirecting.
       setToast({ name: fakeUser.name });
       setTimeout(() => {
-        navigate('/');
+        navigate('/login');
       }, 1200);
     } catch (err) {
       setError(err.message || 'Failed to create an account. Please try again.');
