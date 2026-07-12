@@ -19,6 +19,8 @@ export default function AdminDashboard() {
     bookings: 0,
  
   });
+  const [recentHostels, setRecentHostels] = useState([]);
+const [recentBookings, setRecentBookings] = useState([]);
 
   useEffect(() => {
     const users =
@@ -30,9 +32,8 @@ export default function AdminDashboard() {
     const bookings =
       JSON.parse(localStorage.getItem("bookings")) || [];
 
-    const pendingListings = hostels.filter(
-      (hostel) => hostel.status === "Pending"
-    );
+    setRecentHostels(hostels.slice(-5).reverse());
+setRecentBookings(bookings.slice(-5).reverse());
 
     setStats({
       users: users.length,
@@ -41,6 +42,7 @@ export default function AdminDashboard() {
     
     });
   }, []);
+
 
   const cards = [
     {
@@ -123,16 +125,167 @@ export default function AdminDashboard() {
     className="inline-block mt-6 font-semibold hover:underline"
     style={{ color: ORANGE }}
   >
-    View More →
+    View More 
   </Link>
 
 </CardContent>
               </Card>
+              
             );
 
           })}
+          
 
         </div>
+        <div className="grid lg:grid-cols-2 gap-8 mt-10">
+
+  {/* Recent Listings */}
+
+  <Card>
+
+    <CardContent className="p-6">
+
+      <div className="flex justify-between items-center mb-6">
+
+        <h2
+          className="text-xl font-bold"
+          style={{ color: NAVY }}
+        >
+          Recent Listings
+        </h2>
+
+        <Link
+          to="/managelistings"
+          className="text-sm font-semibold hover:underline"
+          style={{ color: ORANGE }}
+        >
+          View More →
+        </Link>
+
+      </div>
+
+      {recentHostels.length > 0 ? (
+
+        <div className="space-y-4">
+
+          {recentHostels.map((hostel) => (
+
+            <div
+              key={hostel.id}
+              className="flex justify-between items-center border-b pb-3"
+            >
+
+              <div>
+
+                <h3 className="font-semibold">
+                  {hostel.hostelName}
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  {hostel.university}
+                </p>
+
+              </div>
+
+              <span
+                className="text-sm px-3 py-1 rounded-full bg-orange-100"
+                style={{ color: ORANGE }}
+              >
+                {hostel.status || "Pending"}
+              </span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      ) : (
+
+        <p className="text-gray-500">
+          No listings available.
+        </p>
+
+      )}
+
+    </CardContent>
+
+  </Card>
+
+  {/* Recent Bookings */}
+
+  <Card>
+
+    <CardContent className="p-6">
+
+      <div className="flex justify-between items-center mb-6">
+
+        <h2
+          className="text-xl font-bold"
+          style={{ color: NAVY }}
+        >
+          Recent Bookings
+        </h2>
+
+        <Link
+          to="/managebookings"
+          className="text-sm font-semibold hover:underline"
+          style={{ color: ORANGE }}
+        >
+          View More 
+        </Link>
+
+      </div>
+
+      {recentBookings.length > 0 ? (
+
+        <div className="space-y-4">
+
+          {recentBookings.map((booking) => (
+
+            <div
+              key={booking.id}
+              className="flex justify-between items-center border-b pb-3"
+            >
+
+              <div>
+
+                <h3 className="font-semibold">
+                  {booking.studentName}
+                </h3>
+
+                <p className="text-sm text-gray-500">
+                  {booking.hostelName}
+                </p>
+
+              </div>
+
+              <span
+                className="text-sm font-semibold"
+                style={{ color: NAVY }}
+              >
+                {booking.date}
+              </span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      ) : (
+
+        <p className="text-gray-500">
+          No bookings available.
+        </p>
+
+      )}
+
+    </CardContent>
+
+  </Card>
+
+</div>
 
       </div>
     </div>
