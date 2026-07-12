@@ -9,7 +9,7 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Hostels from './pages/Hostels';
+import Hostels from './pages/Hostels'
 
 function App() {
   return (

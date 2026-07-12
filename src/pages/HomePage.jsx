@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowRight,
   MapPin,
@@ -13,9 +13,21 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getProperties } from "@/services/rentcast";
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
+
+const PROPERTY_IMAGES = [
+  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800",
+  "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800",
+  "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800",
+  "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+  "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800",
+  "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+  "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+];
 
 const ROOM_TYPES = [
   { value: "bedsitter", label: "Bedsitter" },
@@ -43,6 +55,30 @@ export default function HomePage() {
   const [location, setLocation] = useState("");
   const [roomType, setRoomType] = useState("");
   const [budget, setBudget] = useState("");
+
+  // RentCast
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadProperties() {
+      try {
+        const data = await getProperties();
+
+        console.log("RentCast:", data);
+
+        setProperties(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load properties");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProperties();
+  }, []);
 
   const handleSearch = () => {
     window.location.href = `/properties?location=${location}&roomType=${roomType}&budget=${budget}`;
