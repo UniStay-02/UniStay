@@ -17,20 +17,21 @@ import { AdminRoute } from './components/AdminRoute';
 import AdminDash from './pages/AdminDash';
 import BookingForm from './pages/BookingForm';
 import BookingConfirmation from './pages/BookingConfirmation';
-
+import About from './pages/About';
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/hostels/:id" element={<HostelDetails />} />
-          <Route path="/hostels" element={<Hostels />} />
-          <Route path="/booking/:id" element={<BookingForm />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+    <>
+      <Router>
+        <AuthProvider>
+       {/* <HomePage/> */}
+      <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/hostels/:id" element={<HostelDetails />} />
+            <Route path="/hostels" element={<Hostels />} />
+            <Route path="/booking/:id" element={<BookingForm />} />
+            <Route path="/booking/:i" element={<BookingForm />} />
+            <Route path ="/about" element={<About/>}/>
 
           <Route
             path="/booking-confirmation"
