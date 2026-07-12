@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
+import Footer from "@/components/Footer";
 
 // Get this from formspree.io after creating a form — looks like
 // "https://formspree.io/f/xyzabcde"
@@ -289,6 +290,7 @@ const Contact = () => {
         </div>
 
       </section>
+       <Footer />
     </div>
   );
 };
