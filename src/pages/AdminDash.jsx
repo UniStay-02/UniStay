@@ -55,7 +55,7 @@ setRecentBookings(bookings.slice(-5).reverse());
       title: "Total Hostels",
       value: stats.hostels,
       icon: Building2,
-      link: "/managelistings",
+      link: "/addhostel",
     },
     {
       title: "Bookings",
@@ -155,7 +155,7 @@ setRecentBookings(bookings.slice(-5).reverse());
         </h2>
 
         <Link
-          to="/managelistings"
+          to="/addhostel"
           className="text-sm font-semibold hover:underline"
           style={{ color: ORANGE }}
         >
