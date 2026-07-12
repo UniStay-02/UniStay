@@ -7,7 +7,7 @@ import PaymentCard from "../components/PaymentCard";
 import AnnouncementCard from "../components/AnnouncementCard";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaSignOutAlt } from "react-icons/fa";
-
+ 
 const Profile = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -16,8 +16,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // Demo data (replace later with data from your teammates)
-  const [hostel] = useState(null);
+  const [hostel, setHostel,] = useState(null);
   const [payment] = useState(null);
   const [announcements] = useState([]);
 
@@ -29,7 +28,18 @@ const Profile = () => {
     if (savedProfile) {
       setStudent(JSON.parse(savedProfile));
     }
+    const savedBooking = localStorage.getItem("bookedHostel");
+
+    if (savedBooking) {
+      setHostel(JSON.parse(savedBooking));
+    }
+    const savedHostel = localStorage.getItem("bookedHostel");
+
+    if (savedHostel) {
+      setHostel(JSON.parse(savedHostel));
+    }
   }, [user]);
+
 
   const handleSave = (studentData) => {
     if (!user) return;
@@ -51,6 +61,10 @@ const Profile = () => {
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+  const handleCancelBooking = () => {
+    localStorage.removeItem("bookedHostel");
+    setHostel(null);
   };
 
   if (!user) {
@@ -120,7 +134,8 @@ const Profile = () => {
             <StudentInfo student={student} />
 
             {/* Hostel Booking */}
-            <HostelBooked hostel={hostel} />
+            <HostelBooked hostel={hostel}
+             onCancel={handleCancelBooking} />
 
             {/* Payment Information */}
             <PaymentCard payment={payment} />
