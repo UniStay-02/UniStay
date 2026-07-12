@@ -374,7 +374,7 @@ const publishHostel = () => {
                 key={index}
                 className="text-sm text-gray-600"
               >
-                📷 {image.name}
+                {image.name}
               </p>
             ))}
           </div>

@@ -9,18 +9,22 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Hostels from './pages/Hostels';
 import ProtectedRoute from './components/ProtectedRoute';
-import DisplayHostels from './pages/DisplayHostels'
-import ManageListings from './pages/ManageListings';
-import AdminDash from './pages/AdminDash';
+
+// import ManageListings from './pages/ManageListings';
+// import AdminDash from './pages/AdminDash';
+import BookingForm from './pages/BookingForm';
+import BookingConfirmation from './pages/BookingConfirmation';
+
 
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          {/* <HomePage/> */}
-          <Routes>
+       {/* <HomePage/> */}
+      <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/hostels/:id" element={<HostelDetails />} />
             <Route path="/hostels" element={<Hostels />} />
@@ -39,10 +43,12 @@ function App() {
             <Route path="/addhostel" element={<AddHostel />} />
             <Route path="/manageusers" element={<ManageUsers />} />
             <Route path="/managebookings" element={<ManageBookings />} />
-            <Route path="/admindash" element={<AdminDash />} />
-          </Routes>
-        </AuthProvider>
+
+      </Routes>
+      </AuthProvider>
+    
       </Router>
+      
     </>
   );
 }
