@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   MapPin,
@@ -59,6 +60,7 @@ export default function HomePage() {
   const [location, setLocation] = useState("");
   const [roomType, setRoomType] = useState("");
   const [budget, setBudget] = useState("");
+  const navigate = useNavigate();
 
   // RentCast
   const [properties, setProperties] = useState([]);
@@ -85,8 +87,14 @@ export default function HomePage() {
   }, []);
 
   const handleSearch = () => {
-    window.location.href = `/properties?location=${location}&roomType=${roomType}&budget=${budget}`;
-  };
+  const params = new URLSearchParams();
+
+  if (location) params.append("location", location);
+  if (roomType) params.append("roomType", roomType);
+  if (budget) params.append("budget", budget);
+
+  navigate(`/hostels?${params.toString()}`);
+};
   const { user } = useAuth();
 
   return (
