@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import DisplayHostels from './pages/DisplayHostels'
 import ManageListings from './pages/ManageListings';
+import AdminDash from './pages/AdminDash';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/managebookings" element={<ManageBookings/>} />
         <Route path="/displayhostels" element={<DisplayHostels/>} />
         <Route path="/managelistings" element={<ManageListings/>} />
+        <Route path="/admindash" element={<AdminDash/>} />
         
       </Routes>
       </AuthProvider>
