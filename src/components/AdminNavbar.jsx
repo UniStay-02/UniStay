@@ -65,8 +65,6 @@ function AdminNavbar() {
           </Link>
 
 
-
-
           <button
             onClick={() => {
               handleLogout();
@@ -74,7 +72,7 @@ function AdminNavbar() {
             }}
             className="w-full flex items-center gap-3 px-6 py-4 text-left hover:bg-red-600 transition"
           >
-            <LogOut size={20} />
+            <LogOut size={18} />
             Logout
           </button>
         </div>
