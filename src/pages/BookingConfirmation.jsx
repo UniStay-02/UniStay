@@ -51,7 +51,7 @@ const BookingConfirmation = () => {
         </div>
 
         <button
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/")}
           className="mt-8 w-full bg-[#0E1733] hover:bg-[#18254f] text-white py-3 rounded-lg font-semibold transition"
         >
           Go to Dashboard

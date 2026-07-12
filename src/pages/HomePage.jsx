@@ -395,7 +395,7 @@ export default function HomePage() {
 
           <div className="text-center mt-14">
             <Link
-              to="/displayhostels"
+              to="/hostels"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg text-white font-semibold"
               style={{ backgroundColor: NAVY }}
             >
