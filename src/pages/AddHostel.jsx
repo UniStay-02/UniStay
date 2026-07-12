@@ -67,7 +67,54 @@ email: ""
       : [...prev.amenities, amenity],
   }));
 };
+const publishHostel = () => {
+  // Get existing hostels
+  const existingHostels =
+    JSON.parse(localStorage.getItem("hostels")) || [];
 
+  // Create a new hostel object
+  const newHostel = {
+    id: Date.now(),
+    ...hostelData,
+    createdAt: new Date().toISOString(),
+    status: "Available",
+  };
+
+  // Save to localStorage
+  existingHostels.push(newHostel);
+
+  localStorage.setItem(
+    "hostels",
+    JSON.stringify(existingHostels)
+  );
+
+  alert("Hostel Published Successfully!");
+
+  console.log(existingHostels);
+
+  // Optional: Reset form
+  setHostelData({
+    hostelName: "",
+    description: "",
+    university: "",
+    hostelType: "",
+    roomType: "",
+    amenities: [],
+    coverImage: null,
+    galleryImages: [],
+    county: "",
+    area: "",
+    mapLink: "",
+    rent: "",
+    deposit: "",
+    bookingFee: "",
+    ownerName: "",
+    phone: "",
+    email: "",
+  });
+
+  setStep(1);
+};
   return (
     <div>
      
@@ -540,14 +587,11 @@ email: ""
       </div>
 
       <Button
-        className="w-full bg-green-600 hover:bg-green-700"
-        onClick={() => {
-          console.log(hostelData);
-          alert("Hostel Published Successfully!");
-        }}
-      >
-        Publish Hostel
-      </Button>
+  className="w-full bg-green-600 hover:bg-green-700"
+  onClick={publishHostel}
+>
+  Publish Hostel
+</Button>
 
     </CardContent>
 
