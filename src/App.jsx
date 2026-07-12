@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import DisplayHostels from './pages/DisplayHostels'
+import ManageListings from './pages/ManageListings';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/manageusers" element={<ManageUsers/>} />
         <Route path="/managebookings" element={<ManageBookings/>} />
         <Route path="/displayhostels" element={<DisplayHostels/>} />
+        <Route path="/managelistings" element={<ManageListings/>} />
         
       </Routes>
       </AuthProvider>

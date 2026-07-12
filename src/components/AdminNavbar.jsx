@@ -7,6 +7,7 @@ const navLinks = [
   { to: "/addhostel", label: "Add Hostel", icon: PlusCircle },
   { to: "/managebookings", label: "Bookings", icon: List },
   { to: "/manageusers", label: "Users", icon: Users },
+  { to: "/managelistings", label: "Manage Listings", icon: Building2 },
 ];
 
  function AdminNavbar() {
