@@ -14,11 +14,15 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { getProperties } from "@/services/rentcast";
 =======
 import { useAuth } from "@/context/AuthContext";
 import DisplayHostels from "@/pages/DisplayHostels"
 >>>>>>> main
+=======
+import { getProperties } from "@/services/rentcast";
+>>>>>>> ad599943ab618709e50383a060c5bc361b6af5aa
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";

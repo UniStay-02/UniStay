@@ -10,6 +10,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Hostels from './pages/Hostels';
 
 =======
@@ -18,6 +19,10 @@ import DisplayHostels from './pages/DisplayHostels'
 import ManageListings from './pages/ManageListings';
 import AdminDash from './pages/AdminDash';
 >>>>>>> main
+=======
+import Hostels from './pages/Hostels';
+
+>>>>>>> ad599943ab618709e50383a060c5bc361b6af5aa
 
 function App() {
   return (

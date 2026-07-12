@@ -73,6 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <AuthContext.Provider value={{ user: state.user, isAdmin, isAuthenticated, login, register, logout }}>
 =======
     <AuthContext.Provider
@@ -86,6 +87,9 @@ export const AuthProvider = ({ children }) => {
       }}
     >
 >>>>>>> main
+=======
+    <AuthContext.Provider value={{ user: state.user, isAdmin, isAuthenticated, login, register, logout }}>
+>>>>>>> ad599943ab618709e50383a060c5bc361b6af5aa
       {children}
     </AuthContext.Provider>
   );
