@@ -32,13 +32,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route element={<ProtectedRoute />}>
-            <Route
-              path="/booking-confirmation"
-              element={<BookingConfirmation />}
-            />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
+          <Route
+            path="/booking-confirmation"
+            element={<ProtectedRoute><BookingConfirmation /></ProtectedRoute>}
+          />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
           <Route path="/admindash" element={<AdminRoute><AdminDash /></AdminRoute>} />
           <Route path="/addhostel" element={<AdminRoute><AddHostel /></AdminRoute>} />
