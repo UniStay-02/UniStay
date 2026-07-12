@@ -10,7 +10,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
-import Hostels from './pages/Hostels'
+import DisplayHostels from './pages/DisplayHostels'
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
          
         <Route path="/" element={<HomePage/>} />
         <Route path="/hostels/:id" element={<HostelDetails/>} />
-        <Route path="/hostels" element={<Hostels/>} />
+        {/* <Route path="/hostels" element={<Hostels/>} /> */}
         <Route path="/profile" element={<Profile/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/login" element={<Login />} />
@@ -30,6 +30,7 @@ function App() {
         <Route path="/addhostel" element={<AddHostel/>} />
         <Route path="/manageusers" element={<ManageUsers/>} />
         <Route path="/managebookings" element={<ManageBookings/>} />
+        <Route path="/displayhostels" element={<DisplayHostels/>} />
         
       </Routes>
       </AuthProvider>

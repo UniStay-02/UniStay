@@ -14,6 +14,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/context/AuthContext";
+import DisplayHostels from "@/pages/DisplayHostels"
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
@@ -90,7 +91,7 @@ export default function HomePage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              to="/hostels"
+              to="/displayhostels"
               className="flex items-center gap-2 px-7 py-3 rounded-md font-semibold"
               style={{ backgroundColor: ORANGE, color: NAVY }}
             >
@@ -361,7 +362,7 @@ export default function HomePage() {
 
           <div className="text-center mt-14">
             <Link
-              to="/properties"
+              to="/displayhostels"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg text-white font-semibold"
               style={{ backgroundColor: NAVY }}
             >

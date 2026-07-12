@@ -52,12 +52,39 @@ email: ""
   };
 
   const handleCoverImage = (e) => {
-    handleChange("coverImage", e.target.files[0]);
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onloadend = () => {
+    handleChange("coverImage", reader.result);
   };
 
-  const handleGalleryImages = (e) => {
-    handleChange("galleryImages", Array.from(e.target.files));
-  };
+  reader.readAsDataURL(file);
+};
+
+ const handleGalleryImages = (e) => {
+  const files = Array.from(e.target.files);
+
+  Promise.all(
+    files.map(
+      (file) =>
+        new Promise((resolve) => {
+          const reader = new FileReader();
+
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+
+          reader.readAsDataURL(file);
+        })
+    )
+  ).then((images) => {
+    handleChange("galleryImages", images);
+  });
+};
 
   const toggleAmenity = (amenity) => {
   setHostelData((prev) => ({
