@@ -47,7 +47,7 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
       // Show a brief "Account created" toast before redirecting.
       setToast({ name: fakeUser.name });
       setTimeout(() => {
-        navigate('/login');
+        navigate('/');
       }, 1200);
     } catch (err) {
       setError(err.message || 'Failed to create an account. Please try again.');
