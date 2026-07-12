@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useAuth } from "@/context/AuthContext";
 
 const NAVY = "#0E1733";
 const ORANGE = "#F98603";
@@ -47,6 +48,7 @@ export default function HomePage() {
   const handleSearch = () => {
     window.location.href = `/properties?location=${location}&roomType=${roomType}&budget=${budget}`;
   };
+  const { user } = useAuth();
 
   return (
     <div className="bg-white text-[#1C2130]">
@@ -96,12 +98,12 @@ export default function HomePage() {
               <ArrowRight size={16} />
             </Link>
 
-            <Link
-              to="/register"
-              className="px-7 py-3 rounded-md border border-white/30 text-white font-semibold"
-            >
-              List Property
-            </Link>
+           <Link
+  to={user ? "/addhostel" : "/register"}
+  className="px-7 py-3 rounded-md border border-white/30 text-white font-semibold"
+>
+  List Property
+</Link>
           </div>
         </div>
       </section>
