@@ -5,47 +5,45 @@ import {
   FaEnvelope,
   FaPhone,
   FaUniversity,
-  FaMapMarkerAlt,
   FaGraduationCap,
+  FaIdCard,
   FaCalendarAlt,
   FaSave,
 } from "react-icons/fa";
 
-const StudentForm = ({ onSave }) => {
+const StudentForm = ({ student: initialStudent, onSave }) => {
   const { user } = useAuth();
 
   const [student, setStudent] = useState({
-    fullName: "",
-    email: user?.email || "",
-    phone: "",
-    university: "",
-    campus: "",
-    course: "",
-    yearOfStudy: "",
+    fullName: initialStudent?.fullName || "",
+    email: user?.email || initialStudent?.email || "",
+    phone: initialStudent?.phone || "",
+    university: initialStudent?.university || "",
+    registrationNumber: initialStudent?.registrationNumber || "",
+    course: initialStudent?.course || "",
+    yearOfStudy: initialStudent?.yearOfStudy || "",
   });
 
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setStudent({
-      ...student,
+    setStudent((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const values = [
-      student.fullName,
-      student.phone,
-      student.university,
-      student.campus,
-      student.course,
-      student.yearOfStudy,
-    ];
-
-    if (values.some((value) => value.trim() === "")) {
+    if (
+      !student.fullName.trim() ||
+      !student.phone.trim() ||
+      !student.university.trim() ||
+      !student.registrationNumber.trim() ||
+      !student.course.trim() ||
+      !student.yearOfStudy.trim()
+    ) {
       setError("Please fill in all the required fields.");
       return;
     }
@@ -58,16 +56,20 @@ const StudentForm = ({ onSave }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
-      <h2 className="text-2xl font-bold text-[#0E1733] mb-6 border-b-2 border-[#F98603] inline-block">
+    <div className="bg-white rounded-2xl shadow-xl p-8">
+      <h2 className="text-3xl font-bold text-[#0E1733] mb-2">
         Complete Your Student Profile
       </h2>
+
+      <p className="text-gray-500 mb-8">
+        Fill in your details to continue using UniStay.
+      </p>
 
       <form onSubmit={handleSubmit}>
         <div className="grid md:grid-cols-2 gap-6">
           {/* Full Name */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaUser className="text-[#F98603]" />
               Full Name
             </label>
@@ -78,15 +80,15 @@ const StudentForm = ({ onSave }) => {
               value={student.fullName}
               onChange={handleChange}
               placeholder="Enter your full name"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaEnvelope className="text-[#F98603]" />
-              Email
+              Email Address
             </label>
 
             <input
@@ -100,7 +102,7 @@ const StudentForm = ({ onSave }) => {
 
           {/* Phone */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaPhone className="text-[#F98603]" />
               Phone Number
             </label>
@@ -110,14 +112,14 @@ const StudentForm = ({ onSave }) => {
               name="phone"
               value={student.phone}
               onChange={handleChange}
-              placeholder="Enter your phone number"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              placeholder="07XXXXXXXX"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             />
           </div>
 
           {/* University */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaUniversity className="text-[#F98603]" />
               University
             </label>
@@ -128,30 +130,30 @@ const StudentForm = ({ onSave }) => {
               value={student.university}
               onChange={handleChange}
               placeholder="Enter your university"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             />
           </div>
 
-          {/* Campus */}
+          {/* Registration Number */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
-              <FaMapMarkerAlt className="text-[#F98603]" />
-              Campus
+            <label className="flex items-center gap-2 mb-2 font-medium">
+              <FaIdCard className="text-[#F98603]" />
+              Registration Number
             </label>
 
             <input
               type="text"
-              name="campus"
-              value={student.campus}
+              name="registrationNumber"
+              value={student.registrationNumber}
               onChange={handleChange}
-              placeholder="Enter your campus"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              placeholder="e.g. CSC/1234/2024"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             />
           </div>
 
           {/* Course */}
           <div>
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaGraduationCap className="text-[#F98603]" />
               Course
             </label>
@@ -162,13 +164,13 @@ const StudentForm = ({ onSave }) => {
               value={student.course}
               onChange={handleChange}
               placeholder="Enter your course"
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             />
           </div>
 
           {/* Year of Study */}
           <div className="md:col-span-2">
-            <label className="flex items-center gap-2 mb-2">
+            <label className="flex items-center gap-2 mb-2 font-medium">
               <FaCalendarAlt className="text-[#F98603]" />
               Year of Study
             </label>
@@ -177,24 +179,24 @@ const StudentForm = ({ onSave }) => {
               name="yearOfStudy"
               value={student.yearOfStudy}
               onChange={handleChange}
-              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-[#F98603] outline-none"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#F98603]"
             >
               <option value="">Select Year</option>
-              <option>First Year</option>
-              <option>Second Year</option>
-              <option>Third Year</option>
-              <option>Fourth Year</option>
-              <option>Fifth Year</option>
-              <option>Postgraduate</option>
+              <option value="First Year">First Year</option>
+              <option value="Second Year">Second Year</option>
+              <option value="Third Year">Third Year</option>
+              <option value="Fourth Year">Fourth Year</option>
+              <option value="Fifth Year">Fifth Year</option>
+              <option value="Postgraduate">Postgraduate</option>
             </select>
           </div>
         </div>
 
-        {error && <p className="text-red-600 mt-4 font-medium">{error}</p>}
+        {error && <p className="text-red-600 font-medium mt-6">{error}</p>}
 
         <button
           type="submit"
-          className="mt-8 bg-[#F98603] hover:bg-orange-500 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+          className="mt-8 bg-[#F98603] hover:bg-orange-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition"
         >
           <FaSave />
           Save Profile

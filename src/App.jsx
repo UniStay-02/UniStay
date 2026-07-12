@@ -9,8 +9,15 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
+<<<<<<< HEAD
 import Hostels from './pages/Hostels';
 
+=======
+import ProtectedRoute from './components/ProtectedRoute';
+import DisplayHostels from './pages/DisplayHostels'
+import ManageListings from './pages/ManageListings';
+import AdminDash from './pages/AdminDash';
+>>>>>>> main
 
 function App() {
   return (
@@ -19,18 +26,25 @@ function App() {
         <AuthProvider>
        {/* <HomePage/> */}
       <Routes>
-         
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/hostels/:id" element={<HostelDetails/>} />
-        <Route path="/hostels" element={<Hostels/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/addhostel" element={<AddHostel/>} />
-        <Route path="/manageusers" element={<ManageUsers/>} />
-        <Route path="/managebookings" element={<ManageBookings/>} />
-        
+            <Route path="/" element={<HomePage />} />
+            <Route path="/hostels/:id" element={<HostelDetails />} />
+            <Route path="/hostels" element={<Hostels />} />
+            <Route path="/booking/:id" element={<BookingForm />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path="/booking-confirmation"
+                element={<BookingConfirmation />}
+              />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/addhostel" element={<AddHostel />} />
+            <Route path="/manageusers" element={<ManageUsers />} />
+            <Route path="/managebookings" element={<ManageBookings />} />
+
       </Routes>
       </AuthProvider>
     
