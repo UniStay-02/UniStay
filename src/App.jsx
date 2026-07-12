@@ -10,9 +10,10 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
-import Hostels from './pages/Hostels';
-import BookingForm from './pages/BookingForm';
-import BookingConfirmation from './pages/BookingConfirmation';
+import DisplayHostels from './pages/DisplayHostels'
+import ManageListings from './pages/ManageListings';
+import AdminDash from './pages/AdminDash';
+
 function App() {
   return (
     <>
