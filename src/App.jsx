@@ -9,7 +9,7 @@ import ManageBookings from './pages/ManageBookings'
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Hostels from './pages/Hostels'
+>>>>>>>>> Temporary merge branch 2
 
 function App() {
   return (
